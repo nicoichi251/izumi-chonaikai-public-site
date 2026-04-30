@@ -1,17 +1,15 @@
 import type { MetadataRoute } from "next";
 
-const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ?? "https://hassamu-izumi.vercel.app";
-
+/**
+ * 役員会承認前は全クローラを拒否。サイトマップ参照も意図的に外し、
+ * クローラへのヒントを一切残さない。
+ * 承認・正式公開時に allow と sitemap 指定へ戻す。
+ */
 export default function robots(): MetadataRoute.Robots {
   return {
-    rules: [
-      {
-        userAgent: "*",
-        allow: "/",
-      },
-    ],
-    sitemap: `${SITE_URL}/sitemap.xml`,
-    host: SITE_URL,
+    rules: {
+      userAgent: "*",
+      disallow: "/",
+    },
   };
 }

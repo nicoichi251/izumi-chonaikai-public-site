@@ -60,6 +60,18 @@ export const metadata: Metadata = {
     description,
     // twitter 画像は src/app/twitter-image.tsx の file convention で自動生成。
   },
+  // 役員会承認前のサンプルデータ状態のため検索エンジンへのインデックスをブロック。
+  // 承認・正式公開時に index/follow=true へ戻す（README 公開ステータス節を参照）。
+  robots: {
+    index: false,
+    follow: false,
+    nocache: true,
+    googleBot: {
+      index: false,
+      follow: false,
+      noimageindex: true,
+    },
+  },
 };
 
 export default function RootLayout({

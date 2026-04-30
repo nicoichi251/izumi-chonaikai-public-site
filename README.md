@@ -7,6 +7,18 @@
 - **リポジトリ**: https://github.com/nicoichi251/izumi-chonaikai-public-site
 - 関連文書: `cc-quickstart-guide-v1.1.md` / `public-site-implementation-plan-v1.0.md`
 
+## 🔒 公開ステータス
+
+現在は noindex 設定により、検索エンジンへのインデックスをブロックしています。役員会承認後に解除予定。
+
+サンプルデータ状態のまま検索結果に出ないよう、`src/app/layout.tsx` の `metadata.robots` で `index: false / follow: false / nocache: true` を、`src/app/robots.ts` で `User-agent: * / Disallow: /` を設定中。
+
+**解除手順（役員会承認後）**:
+1. `src/app/layout.tsx` の `robots` ブロックを `index: true / follow: true` へ
+2. `src/app/robots.ts` を `allow: '/'` + `sitemap` 指定に戻す
+3. この節を「公開中」表示に更新
+4. Google Search Console に登録
+
 ## 技術スタック
 
 | レイヤ | 採用 |
