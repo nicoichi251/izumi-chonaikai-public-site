@@ -23,7 +23,7 @@ export default function TermsPage() {
       <section className="bg-white rounded-[2rem] border border-stone-100 shadow-card p-8 text-center">
         <span
           aria-hidden
-          className="w-12 h-12 bg-stone-50 text-stone-400 rounded-2xl flex items-center justify-center mx-auto mb-4"
+          className="w-12 h-12 bg-stone-50 text-stone-500 rounded-2xl flex items-center justify-center mx-auto mb-4"
         >
           <FileText size={20} />
         </span>

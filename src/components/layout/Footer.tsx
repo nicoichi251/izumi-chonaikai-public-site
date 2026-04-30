@@ -20,7 +20,7 @@ export function Footer() {
           お問い合わせ
         </Link>
       </div>
-      <p className="text-center font-bold tracking-widest text-stone-400">
+      <p className="text-center font-bold tracking-widest text-stone-500">
         © {year} 発寒泉町内会
       </p>
     </footer>

@@ -21,7 +21,7 @@ export function Header() {
             <span className="block font-black text-sm text-stone-800 leading-none">
               発寒泉町内会
             </span>
-            <span className="block text-[8px] font-bold text-stone-400 mt-1 uppercase tracking-widest">
+            <span className="block text-[8px] font-bold text-stone-500 mt-1 uppercase tracking-widest">
               Digital Hub
             </span>
           </span>

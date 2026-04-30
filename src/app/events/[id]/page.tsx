@@ -68,7 +68,7 @@ export default async function EventDetailPage({ params }: Props) {
         <div className="flex items-start gap-3">
           <CalendarDays size={16} aria-hidden className="text-primary mt-0.5 shrink-0" />
           <div>
-            <dt className="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-0.5">
+            <dt className="text-[10px] font-black text-stone-500 uppercase tracking-widest mb-0.5">
               日時
             </dt>
             <dd className="font-black text-primary">{formatDate(event.date)}</dd>
@@ -77,7 +77,7 @@ export default async function EventDetailPage({ params }: Props) {
         <div className="flex items-start gap-3">
           <MapPin size={16} aria-hidden className="text-primary mt-0.5 shrink-0" />
           <div>
-            <dt className="text-[10px] font-black text-stone-400 uppercase tracking-widest mb-0.5">
+            <dt className="text-[10px] font-black text-stone-500 uppercase tracking-widest mb-0.5">
               場所
             </dt>
             <dd className="font-black text-primary">{event.location}</dd>
@@ -94,7 +94,7 @@ export default async function EventDetailPage({ params }: Props) {
           LINEで申込みする
         </span>
       </Link>
-      <p className="text-[10px] text-stone-400 text-center">
+      <p className="text-[10px] text-stone-500 text-center">
         申込みには LINE 会員登録が必要です。所要時間は約 30 秒です。
       </p>
     </PageShell>

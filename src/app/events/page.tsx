@@ -51,7 +51,7 @@ export default function EventsPage() {
                   <h2 className="font-black text-lg text-stone-800 leading-tight">
                     {event.title}
                   </h2>
-                  <p className="text-[10px] text-stone-400 font-bold mt-2 flex items-center gap-1">
+                  <p className="text-[10px] text-stone-500 font-bold mt-2 flex items-center gap-1">
                     <MapPin size={10} aria-hidden /> {event.location}
                   </p>
                 </div>

@@ -15,7 +15,7 @@ type Props = {
  */
 export function Breadcrumb({ items }: Props) {
   return (
-    <nav aria-label="パンくずリスト" className="text-[10px] font-bold text-stone-400">
+    <nav aria-label="パンくずリスト" className="text-[10px] font-bold text-stone-500">
       <ol className="flex flex-wrap items-center gap-1">
         {items.map((item, idx) => {
           const isLast = idx === items.length - 1;

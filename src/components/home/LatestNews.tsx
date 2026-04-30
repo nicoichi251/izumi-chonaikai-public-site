@@ -42,7 +42,7 @@ export function LatestNews({ news }: Props) {
                 <h4 className="font-bold text-stone-800 text-sm truncate">
                   {item.title}
                 </h4>
-                <p className="text-[9px] text-stone-400 mt-1 uppercase font-bold tracking-wider">
+                <p className="text-[9px] text-stone-500 mt-1 uppercase font-bold tracking-wider">
                   {formatDate(item.date)} — {item.category}
                 </p>
               </div>

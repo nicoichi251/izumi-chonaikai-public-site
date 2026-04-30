@@ -133,7 +133,7 @@ export default function PreviewPage() {
             </li>
           ))}
         </ul>
-        <p className="text-[10px] text-stone-400 leading-relaxed">
+        <p className="text-[10px] text-stone-500 leading-relaxed">
           詳細は{" "}
           <Link href="/privacy" className="text-primary font-bold underline">
             プライバシーポリシー

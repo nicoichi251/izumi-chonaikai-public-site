@@ -30,7 +30,7 @@ export default function HanMapPage() {
 
       <HanMap hanData={mockHanData} />
 
-      <p className="text-[10px] text-stone-400 leading-relaxed">
+      <p className="text-[10px] text-stone-500 leading-relaxed">
         ご自身の班がはっきりしない場合は、お問い合わせフォームから事務局までご連絡ください。
       </p>
     </PageShell>

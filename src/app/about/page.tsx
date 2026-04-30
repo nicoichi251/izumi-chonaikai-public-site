@@ -55,11 +55,11 @@ export default function AboutPage() {
                 {han.name}
               </p>
               <p className="font-bold">{han.range}</p>
-              <p className="text-stone-400 mt-1">{han.landmark}</p>
+              <p className="text-stone-500 mt-1">{han.landmark}</p>
             </li>
           ))}
         </ul>
-        <p className="text-[10px] text-stone-400 mt-4">
+        <p className="text-[10px] text-stone-500 mt-4">
           班長氏名は個人情報のため公開していません。お住まいの班の班長は事務局までお問い合わせください。
         </p>
       </section>

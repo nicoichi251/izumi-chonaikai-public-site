@@ -71,7 +71,7 @@ export default function JoinPage() {
                   >
                     <Icon size={18} />
                   </span>
-                  <span className="text-[8px] font-black text-stone-400 tracking-widest font-mono">
+                  <span className="text-[8px] font-black text-stone-500 tracking-widest font-mono">
                     STEP {idx + 1}
                   </span>
                 </div>
@@ -108,17 +108,17 @@ export default function JoinPage() {
                 aria-label={`${han.name} の QR コード（プレースホルダ）`}
                 className="aspect-square bg-stone-100 rounded-xl border-2 border-dashed border-stone-300 flex flex-col items-center justify-center mb-2"
               >
-                <span className="text-2xl font-black text-stone-400 leading-none">
+                <span className="text-2xl font-black text-stone-500 leading-none">
                   {han.id}
                 </span>
-                <span className="text-[7px] font-black text-stone-400 uppercase tracking-widest mt-1">
+                <span className="text-[7px] font-black text-stone-500 uppercase tracking-widest mt-1">
                   QR (仮)
                 </span>
               </div>
               <p className="font-black text-stone-800 text-[11px] leading-tight">
                 {han.name}
               </p>
-              <p className="text-[9px] text-stone-400 mt-0.5 leading-tight">
+              <p className="text-[9px] text-stone-500 mt-0.5 leading-tight">
                 {han.landmark}
               </p>
             </li>

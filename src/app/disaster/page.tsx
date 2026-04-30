@@ -66,7 +66,7 @@ export default function DisasterPage() {
             </li>
           ))}
         </ul>
-        <p className="text-[10px] text-stone-400 mt-3 leading-relaxed">
+        <p className="text-[10px] text-stone-500 mt-3 leading-relaxed">
           掲載情報はサンプルです。実際の指定避難所一覧は札幌市公式サイトをご確認ください。
         </p>
       </section>

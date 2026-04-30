@@ -37,7 +37,7 @@ export function BottomNav() {
           <li key={href} className="flex-1">
             <Link
               href={href}
-              className="flex flex-col items-center gap-1.5 py-2 text-stone-300 hover:text-primary transition-colors"
+              className="flex flex-col items-center gap-1.5 py-2 text-stone-500 hover:text-primary transition-colors"
             >
               <Icon size={22} aria-hidden />
               <span className="text-[8px] font-black uppercase">{label}</span>

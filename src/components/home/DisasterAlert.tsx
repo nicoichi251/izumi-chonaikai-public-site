@@ -19,7 +19,7 @@ export function DisasterAlert({ alerts }: Props) {
       aria-label="札幌市 防災情報"
       className="bg-orange-50 border border-orange-100 rounded-[2.5rem] p-6 shadow-card"
     >
-      <div className="flex items-center gap-2 mb-4 text-orange-600">
+      <div className="flex items-center gap-2 mb-4 text-orange-700">
         <Rss size={16} aria-hidden />
         <h3 className="font-black text-[10px] tracking-widest uppercase">
           札幌市 防災RSS

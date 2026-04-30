@@ -105,7 +105,7 @@ export default function ContactPage() {
         </ul>
       </section>
 
-      <p className="text-[10px] text-stone-400 leading-relaxed">
+      <p className="text-[10px] text-stone-500 leading-relaxed">
         ※ メールアドレスは仮設定です。役員会承認後に正式アドレスへ差し替えます。
       </p>
     </PageShell>

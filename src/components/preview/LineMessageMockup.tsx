@@ -40,7 +40,7 @@ export function LineMessageMockup({ body, time, read }: Props) {
             {body}
           </p>
         </div>
-        <div className="flex items-center gap-1.5 mt-1 text-[9px] font-bold text-stone-400">
+        <div className="flex items-center gap-1.5 mt-1 text-[9px] font-bold text-stone-500">
           {read && (
             <span className="inline-flex items-center gap-0.5 text-primary">
               <CheckCheck size={10} aria-hidden />

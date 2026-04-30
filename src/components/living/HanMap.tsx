@@ -31,7 +31,7 @@ export function HanMap({ hanData }: Props) {
               className={`aspect-square rounded-xl font-black border flex items-center justify-center transition-all ${
                 active
                   ? "bg-primary text-white border-primary scale-110"
-                  : "bg-white text-stone-400 border-stone-100 hover:text-primary"
+                  : "bg-white text-stone-500 border-stone-100 hover:text-primary"
               }`}
             >
               {han.id}

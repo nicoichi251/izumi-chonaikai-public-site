@@ -54,7 +54,7 @@ export function MemberPageMockup() {
               >
                 <span
                   aria-hidden
-                  className="w-7 h-7 bg-stone-50 rounded-lg flex items-center justify-center text-stone-400"
+                  className="w-7 h-7 bg-stone-50 rounded-lg flex items-center justify-center text-stone-500"
                 >
                   <FileText size={12} />
                 </span>
@@ -62,7 +62,7 @@ export function MemberPageMockup() {
                   <p className="font-black text-stone-800 text-[10px] truncate">
                     {c.title}
                   </p>
-                  <p className="text-[7px] font-bold text-stone-400 mt-0.5 tracking-widest font-mono">
+                  <p className="text-[7px] font-bold text-stone-500 mt-0.5 tracking-widest font-mono">
                     {c.date} — {c.tag}
                   </p>
                 </div>
@@ -91,7 +91,7 @@ export function MemberPageMockup() {
         </div>
       </div>
 
-      <figcaption className="text-center text-[10px] text-stone-400 font-bold">
+      <figcaption className="text-center text-[10px] text-stone-500 font-bold">
         ※ これはイメージです
       </figcaption>
     </figure>

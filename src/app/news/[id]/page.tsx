@@ -67,7 +67,7 @@ export default async function NewsDetailPage({ params }: Props) {
         >
           {item.category}
         </span>
-        <span className="text-[10px] font-bold text-stone-400 tracking-wider font-mono">
+        <span className="text-[10px] font-bold text-stone-500 tracking-wider font-mono">
           {formatDate(item.date)}
         </span>
       </div>
