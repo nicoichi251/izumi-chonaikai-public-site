@@ -1,8 +1,12 @@
 import type {
+  Aed,
   DisasterAlert,
+  EvacuationSite,
   Event,
+  Faq,
   HanInfo,
   News,
+  TrashItem,
 } from "@/types";
 
 /**
@@ -17,6 +21,7 @@ export const mockNews: News[] = [
     date: "2026-03-01",
     category: "お知らせ",
     summary: "令和8年度 定期総会の資料をデジタル公開いたしました。",
+    body: "令和8年度の発寒泉町内会 定期総会に使用する資料をデジタル公開いたしました。会員の皆様は事務局からお送りした URL より内容をご確認ください。\n\n紙資料をご希望の方は、班長または事務局までお声がけください。",
   },
   {
     id: "NEWS_002",
@@ -25,6 +30,7 @@ export const mockNews: News[] = [
     category: "生活情報",
     summary:
       "発寒泉公園の遊具安全点検を実施いたします。点検中は一部の遊具が使用禁止となります。",
+    body: "発寒泉公園の遊具安全点検を、2026年3月5日 9:00〜12:00 に実施いたします。\n\n点検中は一部の遊具が使用禁止となります。お子様の利用にはご注意ください。",
   },
   {
     id: "NEWS_003",
@@ -33,6 +39,7 @@ export const mockNews: News[] = [
     category: "行事",
     summary:
       "恒例の春の一斉清掃を実施します。集合場所は各班のゴミステーション前です。",
+    body: "恒例の春の一斉清掃を 2026年4月19日（日）9:00 より実施します。\n\nきれいな街づくりのため、皆様のご協力をお願いいたします。軍手・ゴミ袋は町内会で用意します。集合場所は各班のゴミステーション前です。",
   },
 ];
 
@@ -80,4 +87,91 @@ export const mockDisasterAlerts: DisasterAlert[] = [
     timestamp: "2026-04-29T08:00:00+09:00",
     source: "札幌市防災RSS",
   },
+];
+
+export const mockTrashSchedule: TrashItem[] = [
+  { days: "月・木", category: "燃やせるゴミ",       colorClass: "text-red-500" },
+  { days: "火",     category: "プラスチック",       colorClass: "text-pink-500" },
+  { days: "水",     category: "びん・缶・ペットボトル", colorClass: "text-emerald-500" },
+  { days: "金",     category: "燃やせないゴミ",     colorClass: "text-stone-500" },
+  { days: "第2土",  category: "雑がみ・ダンボール", colorClass: "text-blue-500" },
+];
+
+export const mockFaqs: Faq[] = [
+  {
+    id: "FAQ_001",
+    question: "ゴミステーションが汚れている時は？",
+    answer:
+      "清掃当番の班、または衛生部までお知らせください。お問い合わせフォームからもご連絡いただけます。",
+  },
+  {
+    id: "FAQ_002",
+    question: "町内会を退会したい場合は？",
+    answer:
+      "班長または事務局へ直接ご連絡ください。退会の手続き自体は簡単で、いつでも可能です。",
+  },
+  {
+    id: "FAQ_003",
+    question: "引っ越してきました。何をすればよいですか？",
+    answer:
+      "お住まいの番地から該当の班を「街区マップ」で確認のうえ、班長へご挨拶ください。LINE登録ページから登録すると、回覧板やお知らせがスマホに届きます。",
+  },
+  {
+    id: "FAQ_004",
+    question: "行事に参加したい場合は？",
+    answer:
+      "LINE会員になると、行事ごとの申込みが LINE 上で完結します。会員でない方も、お問い合わせフォームから事務局へお声がけください。",
+  },
+  {
+    id: "FAQ_005",
+    question: "LINE登録は必須ですか？",
+    answer:
+      "任意です。未登録の方には引き続き紙の回覧板をお届けします。LINE登録をするとよりタイムリーに情報が届きます。",
+  },
+  {
+    id: "FAQ_006",
+    question: "個人情報は連合町内会と共有されますか？",
+    answer:
+      "いいえ。発寒泉町内会で集めた名簿は、連合町内会・他団体・行政には渡しません。詳細はプライバシーポリシーをご確認ください。",
+  },
+  {
+    id: "FAQ_007",
+    question: "役員になりたいのですが、どうすればよいですか？",
+    answer:
+      "事務局までお気軽にお声がけください。年齢・性別・在住年数を問わず歓迎しています。",
+  },
+];
+
+export const mockEvacuationSites: EvacuationSite[] = [
+  {
+    id: "EVAC_001",
+    name: "札幌市西区民センター",
+    address: "札幌市西区琴似2条7丁目",
+    type: "指定避難所",
+  },
+  {
+    id: "EVAC_002",
+    name: "発寒小学校",
+    address: "札幌市西区発寒11条4丁目",
+    type: "指定避難所（基幹）",
+  },
+  {
+    id: "EVAC_003",
+    name: "発寒中学校",
+    address: "札幌市西区発寒12条4丁目",
+    type: "指定避難所",
+  },
+  {
+    id: "EVAC_004",
+    name: "西陵高等学校",
+    address: "札幌市西区発寒13条11丁目",
+    type: "指定避難所",
+  },
+];
+
+export const mockAeds: Aed[] = [
+  { id: "AED_001", name: "発寒泉町内会館",     hours: "開館時のみ" },
+  { id: "AED_002", name: "発寒泉公園 管理棟",  hours: "9:00〜17:00" },
+  { id: "AED_003", name: "西区消防署出張所",   hours: "24時間" },
+  { id: "AED_004", name: "セブンイレブン発寒店", hours: "24時間" },
 ];

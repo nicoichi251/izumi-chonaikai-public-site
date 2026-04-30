@@ -11,6 +11,10 @@ export type News = {
   date: string; // ISO 8601 (YYYY-MM-DD)
   category: NewsCategory;
   summary: string;
+  /**
+   * 詳細ページ本文（マークダウン未使用、改行は段落区切り）。
+   */
+  body?: string;
 };
 
 export type Event = {
@@ -42,4 +46,36 @@ export type DisasterAlert = {
   message: string;
   timestamp: string; // ISO 8601
   source?: string;
+};
+
+export type TrashItem = {
+  days: string; // 「月・木」「火」など
+  category: string; // 「燃やせるゴミ」など
+  /**
+   * カテゴリに合わせた強調色クラス（text-red-500 等）。
+   * 安全に Tailwind に拾わせるため固定文字列で指定する規約。
+   */
+  colorClass: string;
+};
+
+export type Faq = {
+  id: string;
+  question: string;
+  answer: string;
+};
+
+export type EvacuationSite = {
+  id: string;
+  name: string;
+  address: string;
+  /**
+   * 避難所種別（指定避難所 / 福祉避難所 など）。
+   */
+  type: string;
+};
+
+export type Aed = {
+  id: string;
+  name: string; // 設置場所
+  hours: string; // 利用可能時間
 };
