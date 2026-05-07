@@ -97,6 +97,58 @@ public-site/
 
 全ルート 22 件（うち 5 件は `generateStaticParams` の SSG）。
 
+## ヘッドレスWordPress連携（Phase 2 / Sprint 1）
+
+公開HPはお知らせ・広報アーカイブ・FAQ・行事の4種を WordPress（`cms.hassamu-izumi.jp`）から取得する設計です。WP環境がまだ立ち上がっていない期間も開発が止まらないよう、**未設定時はモックデータにフォールバック**します。
+
+### ファイル
+
+| パス | 役割 |
+|---|---|
+| `src/types/wordpress.ts` | WP REST API 返却JSONの型（`WpPost` 基底 + 4種CPT） |
+| `src/lib/wp-api.ts` | `getNews / getBroadcastArchive / getFaqs / getEvents`（fetch + ISR 60秒） |
+| `src/lib/mockWpData.ts` | 各CPTの開発用モック（5件ずつ） |
+| `.env.local.example` | 接続先・認証情報のテンプレート |
+
+### 環境変数
+
+`.env.local.example` をコピーして `.env.local` を作成してください。
+
+| 変数 | 必須 | 説明 |
+|---|---|---|
+| `WP_API_BASE_URL` | 任意 | WP REST API のベースURL（例：`https://cms.hassamu-izumi.jp/wp-json/wp/v2`）。**未設定時はモックを返します**。 |
+| `WP_API_USERNAME` | 任意 | Application Password のユーザー名。下書きプレビュー等を読む時のみ設定。 |
+| `WP_API_APP_PASSWORD` | 任意 | Application Password の発行値。 |
+
+### モード切替の挙動
+
+```
+WP_API_BASE_URL が空                 → src/lib/mockWpData.ts を返す（fetchしない）
+WP_API_BASE_URL 設定 + 200            → JSONをそのまま返す
+WP_API_BASE_URL 設定 + 404            → [] を返す
+WP_API_BASE_URL 設定 + 5xx / timeout  → WpApiError を throw（ビルド・SSR を意図的に失敗させる）
+```
+
+タイムアウトは 8 秒、ISR は 60 秒固定（`REVALIDATE_SECONDS`）。本番設定下で空配列を出さない方針なので、CMSダウン時は呼び出し側で `try/catch` するか、ビルド時にエラーを表面化させてください。
+
+### Local WP との接続（Sprint 1で予定）
+
+Local by Flywheel 等で `hassamu-izumi-cms.local` を立てた場合：
+
+```bash
+# .env.local
+WP_API_BASE_URL=http://hassamu-izumi-cms.local/wp-json/wp/v2
+```
+
+WPには下記のCPTを登録する想定（詳細スキーマは v2.1 章4）：
+
+- `news`（お知らせ・ACF: category, summary, pinned）
+- `broadcast_archive`（広報アーカイブ・ACF: issue_date, pdf_url, …）
+- `faq`（よくある質問・ACF: category, sort_order）
+- `event`（行事・ACF: event_date, location, capacity, registration_url）
+
+> 既存ページ（`/news`, `/events`, `/living/faq` 等）は当面 `src/lib/mockData.ts` のドメイン型を使い続けます。WP→ドメイン型の変換層は Sprint 2 で導入予定。
+
 ## デプロイ（Vercel）
 
 ### 初回デプロイ手順
