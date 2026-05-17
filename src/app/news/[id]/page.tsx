@@ -4,52 +4,59 @@ import { notFound } from "next/navigation";
 import { ChevronLeft, MessageCircle } from "lucide-react";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { PageShell } from "@/components/layout/PageShell";
-import { mockNews } from "@/lib/mockData";
+import { getNewsById } from "@/lib/wp-api";
+import { decodeHtmlEntities, formatJpDate, stripHtml } from "@/lib/wp-format";
+import type { WpNewsCategoryTag } from "@/types/wordpress";
 
 type Props = {
   params: Promise<{ id: string }>;
 };
 
-export async function generateStaticParams() {
-  return mockNews.map((news) => ({ id: news.id }));
-}
+const CATEGORY_BADGE: Record<WpNewsCategoryTag, { label: string; classes: string }> = {
+  important: { label: "重要", classes: "bg-red-50 text-red-600" },
+  event: { label: "行事", classes: "bg-emerald-50 text-emerald-700" },
+  disaster: { label: "防災", classes: "bg-orange-50 text-orange-700" },
+  living: { label: "生活情報", classes: "bg-sky-50 text-sky-700" },
+  info: { label: "お知らせ", classes: "bg-stone-100 text-stone-600" },
+};
+
+const DEFAULT_BADGE = CATEGORY_BADGE.info;
+
+const CATEGORY_RELATED_LINK: Record<WpNewsCategoryTag, { href: string; label: string }> = {
+  important: { href: "/about", label: "町内会について" },
+  event: { href: "/events", label: "行事予定" },
+  disaster: { href: "/disaster", label: "防災情報" },
+  living: { href: "/living", label: "生活便利帳" },
+  info: { href: "/about", label: "町内会について" },
+};
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const item = mockNews.find((n) => n.id === id);
-  if (!item) return { title: "お知らせが見つかりません" };
+  const news = await getNewsById(Number(id));
+  if (!news) return { title: "記事が見つかりません" };
+  const title = decodeHtmlEntities(news.title.rendered);
+  const description = stripHtml(news.excerpt.rendered).slice(0, 120);
   return {
-    title: item.title,
-    description: item.summary,
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      type: "article",
+    },
   };
 }
 
-const formatDate = (iso: string): string => {
-  const d = new Date(iso);
-  return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
-};
-
-const CATEGORY_BADGE: Record<string, string> = {
-  お知らせ: "bg-emerald-100 text-primary",
-  生活情報: "bg-blue-100 text-blue-600",
-  行事: "bg-orange-100 text-orange-600",
-  防災: "bg-red-100 text-red-600",
-};
-
-const CATEGORY_RELATED_LINK: Record<string, { href: string; label: string }> = {
-  お知らせ: { href: "/about", label: "町内会について" },
-  生活情報: { href: "/living", label: "生活便利帳" },
-  行事: { href: "/events", label: "行事予定" },
-  防災: { href: "/disaster", label: "防災情報" },
-};
-
 export default async function NewsDetailPage({ params }: Props) {
   const { id } = await params;
-  const item = mockNews.find((n) => n.id === id);
-  if (!item) notFound();
+  const news = await getNewsById(Number(id));
+  if (!news) notFound();
 
-  const related = CATEGORY_RELATED_LINK[item.category];
-  const paragraphs = (item.body ?? item.summary).split("\n").filter((p) => p.trim() !== "");
+  const title = decodeHtmlEntities(news.title.rendered);
+  const tag = news.acf?.category_tag as WpNewsCategoryTag | undefined;
+  const badge = (tag && CATEGORY_BADGE[tag]) ?? DEFAULT_BADGE;
+  const related = (tag && CATEGORY_RELATED_LINK[tag]) ?? CATEGORY_RELATED_LINK.info;
+  const dateText = formatJpDate(news.acf?.published_at ?? news.date);
 
   return (
     <PageShell>
@@ -57,46 +64,43 @@ export default async function NewsDetailPage({ params }: Props) {
         items={[
           { href: "/", label: "ホーム" },
           { href: "/news", label: "お知らせ" },
-          { label: item.title },
+          { label: title },
         ]}
       />
 
       <div className="flex items-center gap-3 pt-2">
         <span
-          className={`text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest ${CATEGORY_BADGE[item.category]}`}
+          className={`text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest ${badge.classes}`}
         >
-          {item.category}
+          {badge.label}
         </span>
         <span className="text-[10px] font-bold text-stone-500 tracking-wider font-mono">
-          {formatDate(item.date)}
+          {dateText}
         </span>
       </div>
 
       <h1 className="text-2xl font-black text-stone-800 leading-tight">
-        {item.title}
+        {title}
       </h1>
 
-      <article className="space-y-4 text-sm text-stone-600 leading-relaxed">
-        {paragraphs.map((p, idx) => (
-          <p key={idx}>{p}</p>
-        ))}
-      </article>
+      <article
+        className="wp-content space-y-4 text-sm text-stone-600 leading-relaxed"
+        dangerouslySetInnerHTML={{ __html: news.content.rendered }}
+      />
 
       <section className="bg-emerald-50 border border-emerald-100 rounded-[2rem] p-6">
         <h2 className="text-[10px] font-black text-primary uppercase tracking-widest mb-3">
           関連リンク
         </h2>
         <ul className="space-y-2">
-          {related && (
-            <li>
-              <Link
-                href={related.href}
-                className="text-sm font-bold text-stone-700 hover:text-primary"
-              >
-                → {related.label}
-              </Link>
-            </li>
-          )}
+          <li>
+            <Link
+              href={related.href}
+              className="text-sm font-bold text-stone-700 hover:text-primary"
+            >
+              → {related.label}
+            </Link>
+          </li>
           <li>
             <Link
               href="/news"
