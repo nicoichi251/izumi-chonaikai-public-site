@@ -154,7 +154,7 @@ export async function getBroadcastArchive(
 export async function getFaqs(params: CollectionParams = {}): Promise<WpFaq[]> {
   if (!isWpConfigured()) return sliceMock(mockWpFaqs, params).items;
   const { items } = await fetchCollection<WpFaq>("faq", {
-    orderBy: "menu_order",
+    orderBy: "date",
     order: "asc",
     ...params,
   });
@@ -163,7 +163,7 @@ export async function getFaqs(params: CollectionParams = {}): Promise<WpFaq[]> {
 
 export async function getEvents(params: CollectionParams = {}): Promise<WpEvent[]> {
   if (!isWpConfigured()) return sliceMock(mockWpEvents, params).items;
-  const { items } = await fetchCollection<WpEvent>("event", { embed: true, ...params });
+  const { items } = await fetchCollection<WpEvent>("events", { embed: true, ...params });
   return items;
 }
 

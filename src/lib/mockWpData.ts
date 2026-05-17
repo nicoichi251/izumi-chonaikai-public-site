@@ -44,7 +44,7 @@ export const mockWpNews: WpNews[] = [
       protected: false,
     },
     featured_media: 0,
-    acf: { category: "お知らせ", pinned: true, summary: "令和8年度 定期総会の資料をデジタル公開いたしました。" },
+    acf: { published_at: "2026-03-01 09:00:00", category_tag: "important", is_pinned: true },
   },
   {
     id: 1002,
@@ -69,7 +69,7 @@ export const mockWpNews: WpNews[] = [
       protected: false,
     },
     featured_media: 2001,
-    acf: { category: "生活情報", summary: "遊具安全点検中は一部利用不可。" },
+    acf: { published_at: "2026-02-25 09:00:00", category_tag: "living", is_pinned: false },
     _embedded: {
       "wp:featuredmedia": [
         {
@@ -109,7 +109,7 @@ export const mockWpNews: WpNews[] = [
       protected: false,
     },
     featured_media: 0,
-    acf: { category: "行事", summary: "4/19（日）9:00集合。" },
+    acf: { published_at: "2026-02-20 09:00:00", category_tag: "event", is_pinned: false },
   },
   {
     id: 1004,
@@ -134,7 +134,7 @@ export const mockWpNews: WpNews[] = [
       protected: false,
     },
     featured_media: 0,
-    acf: { category: "防災", summary: "5月中旬・発寒小学校で実施予定。" },
+    acf: { published_at: "2026-02-12 09:00:00", category_tag: "disaster", is_pinned: false },
   },
   {
     id: 1005,
@@ -159,7 +159,7 @@ export const mockWpNews: WpNews[] = [
       protected: false,
     },
     featured_media: 0,
-    acf: { category: "お知らせ", summary: "LINE公式アカウント開設準備中。" },
+    acf: { published_at: "2026-02-05 09:00:00", category_tag: "info", is_pinned: false },
   },
 ];
 

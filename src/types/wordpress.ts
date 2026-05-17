@@ -83,11 +83,24 @@ export type WpPost<TAcf = Record<string, unknown>, TType extends string = string
 /**
  * news（お知らせ）CPT。
  * 既存の `News` 型と意味的に対応するが、WP側はrendered HTML + ACFカテゴリ。
+ *
+ * - `category_tag`：ACF Select の英字スラッグ。未知の値が来ても落ちないよう
+ *   既知タグの union + string にしておく。
+ * - `published_at`：WP の `date` とは別に運用上の公開日（YYYY-MM-DD HH:MM:SS）。
+ *   未設定時は呼び出し側で `WpPost.date` にフォールバックする。
+ * - `is_pinned`：true をリスト先頭に固定する用途。
  */
+export type WpNewsCategoryTag =
+  | "important"
+  | "event"
+  | "disaster"
+  | "living"
+  | "info";
+
 export type WpNewsAcf = {
-  category?: "お知らせ" | "生活情報" | "防災" | "行事";
-  summary?: string;
-  pinned?: boolean;
+  published_at?: string;
+  category_tag?: WpNewsCategoryTag | (string & {});
+  is_pinned?: boolean;
 };
 
 export type WpNews = WpPost<WpNewsAcf, "news">;
