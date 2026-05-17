@@ -60,11 +60,15 @@ const buildAuthHeader = (): Record<string, string> => {
   return { Authorization: `Basic ${token}` };
 };
 
-const buildUrl = (endpoint: string, params: CollectionParams): string => {
+const getBase = (endpoint: string): string => {
   if (!WP_API_BASE_URL) {
     throw new WpApiError("WP_API_BASE_URL is not configured", undefined, endpoint);
   }
-  const base = WP_API_BASE_URL.replace(/\/+$/, "");
+  return WP_API_BASE_URL.replace(/\/+$/, "");
+};
+
+const buildUrl = (endpoint: string, params: CollectionParams): string => {
+  const base = getBase(endpoint);
   const search = new URLSearchParams();
   search.set("per_page", String(params.perPage ?? 20));
   if (params.page) search.set("page", String(params.page));
@@ -72,6 +76,12 @@ const buildUrl = (endpoint: string, params: CollectionParams): string => {
   if (params.order) search.set("order", params.order);
   if (params.embed) search.set("_embed", "true");
   return `${base}/${endpoint}?${search.toString()}`;
+};
+
+const buildSingleUrl = (endpoint: string, id: number, embed: boolean): string => {
+  const base = getBase(endpoint);
+  const suffix = embed ? "?_embed=true" : "";
+  return `${base}/${endpoint}/${id}${suffix}`;
 };
 
 async function fetchCollection<T>(
@@ -134,10 +144,61 @@ const sliceMock = <T>(items: T[], params: CollectionParams): FetchCollectionResu
   };
 };
 
+async function fetchSingle<T>(endpoint: string, id: number, embed = true): Promise<T | null> {
+  const url = buildSingleUrl(endpoint, id, embed);
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+
+  try {
+    const res = await fetch(url, {
+      headers: {
+        Accept: "application/json",
+        ...buildAuthHeader(),
+      },
+      next: { revalidate: REVALIDATE_SECONDS },
+      signal: controller.signal,
+    });
+
+    if (res.status === 404) return null;
+    if (!res.ok) {
+      throw new WpApiError(
+        `WP API ${endpoint}/${id} responded with HTTP ${res.status}`,
+        res.status,
+        endpoint,
+      );
+    }
+    return (await res.json()) as T;
+  } catch (err) {
+    if (err instanceof WpApiError) throw err;
+    if (err instanceof DOMException && err.name === "AbortError") {
+      throw new WpApiError(
+        `WP API ${endpoint}/${id} timed out after ${REQUEST_TIMEOUT_MS}ms`,
+        undefined,
+        endpoint,
+      );
+    }
+    const message = err instanceof Error ? err.message : String(err);
+    throw new WpApiError(`WP API ${endpoint}/${id} request failed: ${message}`, undefined, endpoint);
+  } finally {
+    clearTimeout(timeoutId);
+  }
+}
+
 export async function getNews(params: CollectionParams = {}): Promise<WpNews[]> {
   if (!isWpConfigured()) return sliceMock(mockWpNews, params).items;
   const { items } = await fetchCollection<WpNews>("news", { embed: true, ...params });
   return items;
+}
+
+/**
+ * 単一お知らせ取得。
+ * - 404 → null（記事が存在しない、呼び出し側で notFound() 想定）
+ * - 5xx / timeout / network → throw（WP障害を可視化）
+ * - WP_API_BASE_URL 未設定時も throw（mockData にはフォールバックしない設計）
+ */
+export async function getNewsById(id: number): Promise<WpNews | null> {
+  if (!Number.isFinite(id) || id <= 0) return null;
+  return fetchSingle<WpNews>("news", id);
 }
 
 export async function getBroadcastArchive(
@@ -165,6 +226,14 @@ export async function getEvents(params: CollectionParams = {}): Promise<WpEvent[
   if (!isWpConfigured()) return sliceMock(mockWpEvents, params).items;
   const { items } = await fetchCollection<WpEvent>("events", { embed: true, ...params });
   return items;
+}
+
+/**
+ * 単一行事取得。getNewsById と同じエラー方針。
+ */
+export async function getEventById(id: number): Promise<WpEvent | null> {
+  if (!Number.isFinite(id) || id <= 0) return null;
+  return fetchSingle<WpEvent>("events", id);
 }
 
 export { WpApiError };
