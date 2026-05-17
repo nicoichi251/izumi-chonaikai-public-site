@@ -131,18 +131,22 @@ export type WpFaqAcf = {
 export type WpFaq = WpPost<WpFaqAcf, "faq">;
 
 /**
- * event（行事）CPT。
- * 開催日・場所・募集状況をACFに格納。
+ * events（行事）CPT。
+ * 開催日・場所・主催・申込URLをACFに格納。
+ *
+ * - `event_date`：開催日（YYYY-MM-DD）。
+ * - `event_time`：開始時刻（HH:MM:SS）。
+ * - `signup_url`：未設定時は WP から空文字で返る（null ではない）。
  */
 export type WpEventAcf = {
   event_date?: string;
-  event_end_date?: string;
-  location?: string;
-  capacity?: number;
-  registration_url?: string;
+  event_time?: string;
+  event_location?: string;
+  event_organizer?: string;
+  signup_url?: string;
   is_canceled?: boolean;
 };
 
-export type WpEvent = WpPost<WpEventAcf, "event">;
+export type WpEvent = WpPost<WpEventAcf, "events">;
 
 export type WpCollection = WpNews | WpBroadcastArchive | WpFaq | WpEvent;
