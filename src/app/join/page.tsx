@@ -9,6 +9,7 @@ import {
 } from "lucide-react";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { PageShell } from "@/components/layout/PageShell";
+import { LineJoinCTA } from "@/components/cta/LineJoinCTA";
 import { mockHanData } from "@/lib/mockData";
 
 export const metadata: Metadata = {
@@ -50,8 +51,14 @@ export default function JoinPage() {
         LINEで登録する
       </h1>
       <p className="text-xs text-stone-500 leading-relaxed">
-        所要時間は約 30 秒。班ごとに友だち追加用の QR コードをご用意しています。
+        所要時間は約 30 秒。下のボタンから直接友だち追加、または班ごとの QR コードでもご登録いただけます。
       </p>
+
+      {/* 主導線：友だち追加（lin.ee） */}
+      <LineJoinCTA
+        title="LINEで会員登録"
+        description="ボタンを押すと LINE が開き、友だち追加 → 簡単な情報入力で完了します。"
+      />
 
       {/* 登録の流れ 4ステップ */}
       <section aria-label="登録の流れ" className="space-y-3">

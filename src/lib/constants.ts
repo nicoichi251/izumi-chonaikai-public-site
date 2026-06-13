@@ -21,6 +21,12 @@ export const EMERGENCY_NUMBERS = {
 } as const;
 
 /**
+ * LINE 公式アカウントへの永続的な友だち追加URL。
+ * 役員会で発行された短縮URL（lin.ee）。差し替え時はここ一箇所のみ。
+ */
+export const LINE_ADD_FRIEND_URL = "https://lin.ee/zoFCyNY";
+
+/**
  * 札幌市公式の外部リンク。
  */
 export const SAPPORO_LINKS = {

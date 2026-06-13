@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, MessageCircle, ShieldCheck, Sparkles } from "lucide-react";
+import { MessageCircle, ShieldCheck, Sparkles } from "lucide-react";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { PageShell } from "@/components/layout/PageShell";
 import { LineMessageMockup } from "@/components/preview/LineMessageMockup";
 import { MemberPageMockup } from "@/components/preview/MemberPageMockup";
+import { LineJoinCTA } from "@/components/cta/LineJoinCTA";
 
 export const metadata: Metadata = {
   title: "会員ページのプレビュー",
@@ -143,27 +144,21 @@ export default function PreviewPage() {
       </section>
 
       {/* CTA */}
-      <section
-        aria-label="LINE登録への導線"
-        className="bg-primary rounded-[3rem] p-8 shadow-lifted text-white text-center"
-      >
-        <h2 className="text-xl font-black mb-3 leading-tight">
-          準備はいいですか？
-        </h2>
-        <p className="text-sm text-emerald-100/90 mb-6 leading-relaxed">
-          所要時間は約 30 秒。お住まいの班の QR コードを読み取るだけで完了します。
-        </p>
+      <LineJoinCTA
+        variant="compact"
+        title="準備はいいですか？"
+        description="所要時間は約 30 秒・無料・いつでも退会できます。下のボタンから直接友だち追加に進めます。"
+      />
+
+      <p className="text-[10px] text-stone-500 text-center -mt-2">
+        班ごとの QR コードからも登録できます：
         <Link
           href="/join"
-          className="inline-flex items-center gap-2 bg-white text-primary px-6 py-4 rounded-full font-black text-sm shadow-md active:scale-[0.99] transition-transform"
+          className="text-primary font-bold underline ml-1"
         >
-          LINEで登録する
-          <ArrowRight size={16} aria-hidden />
+          班別QR一覧へ
         </Link>
-        <p className="text-[10px] text-emerald-100/80 mt-3 font-bold">
-          所要時間：約 30 秒
-        </p>
-      </section>
+      </p>
     </PageShell>
   );
 }

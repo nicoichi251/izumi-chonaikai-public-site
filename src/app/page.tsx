@@ -7,6 +7,7 @@ import { DisasterAlert } from "@/components/home/DisasterAlert";
 import { LatestNews } from "@/components/home/LatestNews";
 import { PreviewCTA } from "@/components/home/PreviewCTA";
 import { QuickNav } from "@/components/home/QuickNav";
+import { LineJoinCTA } from "@/components/cta/LineJoinCTA";
 import { getNews } from "@/lib/wp-api";
 import { mockDisasterAlerts } from "@/lib/mockData";
 import type { WpNews } from "@/types/wordpress";
@@ -37,6 +38,9 @@ export default async function HomePage() {
         <HeroSection />
         <DisasterAlert alerts={mockDisasterAlerts} />
         <LatestNews news={news} />
+        <div className="px-2">
+          <LineJoinCTA />
+        </div>
         <PreviewCTA />
         <QuickNav />
         <Footer />
