@@ -134,7 +134,14 @@ export const mockWpNews: WpNews[] = [
       protected: false,
     },
     featured_media: 0,
-    acf: { published_at: "2026-02-12 09:00:00", category_tag: "disaster", is_pinned: false },
+    acf: {
+      published_at: "2026-02-12 09:00:00",
+      category_tag: "disaster",
+      is_pinned: false,
+      // 会員のみ向け（HPでは非表示・LIFFでは表示）。
+      // フィルタの動作確認用デモデータ。
+      visibility: "members",
+    },
   },
   {
     id: 1005,
@@ -519,6 +526,10 @@ export const mockWpEvents: WpEvent[] = [
       event_organizer: "町内会本部",
       signup_url: "",
       is_canceled: false,
+      // HPには概要を出すが、参加申込は会員ページに誘導するパターン。
+      visibility: "both",
+      show_form: true,
+      form_type: "event_entry",
     },
   },
   {

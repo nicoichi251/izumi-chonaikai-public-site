@@ -11,8 +11,10 @@ import {
 } from "lucide-react";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { PageShell } from "@/components/layout/PageShell";
+import { MemberFormCta } from "@/components/wp/MemberFormCta";
 import { getEventById } from "@/lib/wp-api";
 import { decodeHtmlEntities, formatJpDate, formatJpTime, stripHtml } from "@/lib/wp-format";
+import { shouldShowMemberCta } from "@/lib/wp-visibility";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -120,7 +122,11 @@ export default async function EventDetailPage({ params }: Props) {
         )}
       </dl>
 
-      {!isCanceled && signupUrl && (
+      {!isCanceled && shouldShowMemberCta(event) && (
+        <MemberFormCta formType={event.acf?.form_type} />
+      )}
+
+      {!isCanceled && !shouldShowMemberCta(event) && signupUrl && (
         <a
           href={signupUrl}
           target="_blank"
@@ -131,7 +137,7 @@ export default async function EventDetailPage({ params }: Props) {
         </a>
       )}
 
-      {!isCanceled && !signupUrl && (
+      {!isCanceled && !shouldShowMemberCta(event) && !signupUrl && (
         <Link
           href="/join"
           className="block bg-primary text-white text-center py-4 rounded-2xl font-black text-sm shadow-xl active:scale-[0.99] transition-transform"

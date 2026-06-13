@@ -10,6 +10,10 @@ import {
   mockWpFaqs,
   mockWpNews,
 } from "./mockWpData";
+import {
+  filterPublicVisible,
+  gateSingleForPublic,
+} from "./wp-visibility";
 
 /**
  * ヘッドレスWordPress（cms.hassamu-izumi.jp）への薄いクライアント。
@@ -185,9 +189,11 @@ async function fetchSingle<T>(endpoint: string, id: number, embed = true): Promi
 }
 
 export async function getNews(params: CollectionParams = {}): Promise<WpNews[]> {
-  if (!isWpConfigured()) return sliceMock(mockWpNews, params).items;
+  if (!isWpConfigured()) {
+    return filterPublicVisible(sliceMock(mockWpNews, params).items);
+  }
   const { items } = await fetchCollection<WpNews>("news", { embed: true, ...params });
-  return items;
+  return filterPublicVisible(items);
 }
 
 /**
@@ -195,10 +201,12 @@ export async function getNews(params: CollectionParams = {}): Promise<WpNews[]> 
  * - 404 → null（記事が存在しない、呼び出し側で notFound() 想定）
  * - 5xx / timeout / network → throw（WP障害を可視化）
  * - WP_API_BASE_URL 未設定時も throw（mockData にはフォールバックしない設計）
+ * - visibility=members の記事 → null（HP では非公開扱い）
  */
 export async function getNewsById(id: number): Promise<WpNews | null> {
   if (!Number.isFinite(id) || id <= 0) return null;
-  return fetchSingle<WpNews>("news", id);
+  const post = await fetchSingle<WpNews>("news", id);
+  return gateSingleForPublic(post);
 }
 
 export async function getBroadcastArchive(
@@ -223,17 +231,21 @@ export async function getFaqs(params: CollectionParams = {}): Promise<WpFaq[]> {
 }
 
 export async function getEvents(params: CollectionParams = {}): Promise<WpEvent[]> {
-  if (!isWpConfigured()) return sliceMock(mockWpEvents, params).items;
+  if (!isWpConfigured()) {
+    return filterPublicVisible(sliceMock(mockWpEvents, params).items);
+  }
   const { items } = await fetchCollection<WpEvent>("events", { embed: true, ...params });
-  return items;
+  return filterPublicVisible(items);
 }
 
 /**
  * 単一行事取得。getNewsById と同じエラー方針。
+ * visibility=members の行事 → null（HP では非公開扱い）。
  */
 export async function getEventById(id: number): Promise<WpEvent | null> {
   if (!Number.isFinite(id) || id <= 0) return null;
-  return fetchSingle<WpEvent>("events", id);
+  const post = await fetchSingle<WpEvent>("events", id);
+  return gateSingleForPublic(post);
 }
 
 export { WpApiError };

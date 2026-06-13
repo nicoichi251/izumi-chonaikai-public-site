@@ -4,8 +4,10 @@ import { notFound } from "next/navigation";
 import { ChevronLeft, MessageCircle } from "lucide-react";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { PageShell } from "@/components/layout/PageShell";
+import { MemberFormCta } from "@/components/wp/MemberFormCta";
 import { getNewsById } from "@/lib/wp-api";
 import { decodeHtmlEntities, formatJpDate, stripHtml } from "@/lib/wp-format";
+import { shouldShowMemberCta } from "@/lib/wp-visibility";
 import type { WpNewsCategoryTag } from "@/types/wordpress";
 
 type Props = {
@@ -87,6 +89,10 @@ export default async function NewsDetailPage({ params }: Props) {
         className="wp-content space-y-4 text-sm text-stone-600 leading-relaxed"
         dangerouslySetInnerHTML={{ __html: news.content.rendered }}
       />
+
+      {shouldShowMemberCta(news) && (
+        <MemberFormCta formType={news.acf?.form_type} />
+      )}
 
       <section className="bg-emerald-50 border border-emerald-100 rounded-[2rem] p-6">
         <h2 className="text-[10px] font-black text-primary uppercase tracking-widest mb-3">

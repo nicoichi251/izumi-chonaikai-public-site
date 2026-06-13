@@ -12,6 +12,7 @@ import { mockDisasterAlerts } from "@/lib/mockData";
 import type { WpNews } from "@/types/wordpress";
 
 const HOME_NEWS_LIMIT = 5;
+const HOME_NEWS_FETCH = 20;
 
 const sortByPinAndDate = (items: WpNews[]): WpNews[] =>
   [...items].sort((a, b) => {
@@ -24,7 +25,9 @@ const sortByPinAndDate = (items: WpNews[]): WpNews[] =>
   });
 
 export default async function HomePage() {
-  const newsRaw = await getNews({ perPage: HOME_NEWS_LIMIT });
+  // members 限定記事が混在しても HOME_NEWS_LIMIT 件を確保できるよう
+  // 多めに取得してから filter/sort/slice する。
+  const newsRaw = await getNews({ perPage: HOME_NEWS_FETCH });
   const news = sortByPinAndDate(newsRaw).slice(0, HOME_NEWS_LIMIT);
 
   return (

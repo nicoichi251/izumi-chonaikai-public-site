@@ -89,6 +89,10 @@ export type WpPost<TAcf = Record<string, unknown>, TType extends string = string
  * - `published_at`：WP の `date` とは別に運用上の公開日（YYYY-MM-DD HH:MM:SS）。
  *   未設定時は呼び出し側で `WpPost.date` にフォールバックする。
  * - `is_pinned`：true をリスト先頭に固定する用途。
+ * - `visibility` / `show_form` / `form_type`：会員出し分け設定（mu-plugin の
+ *   group_membership_visibility.json で定義）。public-site では
+ *   `visibility ∈ {public, both}` のみ表示し、`show_form=true` の記事には
+ *   LIFF会員ページへの誘導CTAを出す。
  */
 export type WpNewsCategoryTag =
   | "important"
@@ -97,7 +101,33 @@ export type WpNewsCategoryTag =
   | "living"
   | "info";
 
-export type WpNewsAcf = {
+/**
+ * 会員出し分けの公開範囲。
+ * - public：HP のみ
+ * - members：LIFF（会員アプリ）のみ。HP では非表示。
+ * - both：HP と LIFF の両方
+ * - undefined：レガシー記事（visibility 未設定）は public 扱い（後方互換）
+ */
+export type WpVisibility = "public" | "members" | "both";
+
+/**
+ * `show_form=true` のときに描画するフォーム種別。
+ * - none：表示しない（show_form OFF と等価）
+ * - event_entry：参加申込（LIFFで処理）
+ * - circular_confirm：回覧板の確認（LIFFで処理）
+ */
+export type WpFormType = "none" | "event_entry" | "circular_confirm";
+
+/**
+ * 会員出し分け設定の共通フィールド。news / events 双方に同じ形で乗る。
+ */
+export type WpMembershipVisibilityAcf = {
+  visibility?: WpVisibility | (string & {});
+  show_form?: boolean;
+  form_type?: WpFormType | (string & {});
+};
+
+export type WpNewsAcf = WpMembershipVisibilityAcf & {
   published_at?: string;
   category_tag?: WpNewsCategoryTag | (string & {});
   is_pinned?: boolean;
@@ -138,7 +168,7 @@ export type WpFaq = WpPost<WpFaqAcf, "faq">;
  * - `event_time`：開始時刻（HH:MM:SS）。
  * - `signup_url`：未設定時は WP から空文字で返る（null ではない）。
  */
-export type WpEventAcf = {
+export type WpEventAcf = WpMembershipVisibilityAcf & {
   event_date?: string;
   event_time?: string;
   event_location?: string;
