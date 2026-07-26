@@ -3,14 +3,13 @@ import { Header } from "@/components/layout/Header";
 import { BottomNav } from "@/components/layout/BottomNav";
 import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/home/HeroSection";
-import { DisasterAlert } from "@/components/home/DisasterAlert";
+import { DisasterAlert, type DisasterFeedItem } from "@/components/home/DisasterAlert";
 import { DigitalFeatures } from "@/components/home/DigitalFeatures";
 import { LatestNews } from "@/components/home/LatestNews";
 import { LineJoinCard } from "@/components/home/LineJoinCard";
 import { PreviewCTA } from "@/components/home/PreviewCTA";
 import { QuickNav } from "@/components/home/QuickNav";
 import { getNews } from "@/lib/wp-api";
-import { mockDisasterAlerts } from "@/lib/mockData";
 import type { WpNews } from "@/types/wordpress";
 
 // D1の最新コンテンツを常に反映するため動的レンダリング（旧ISR 60sの置き換え）
@@ -33,8 +32,25 @@ const sortByPinAndDate = (items: WpNews[]): WpNews[] =>
  * SP: 1カラム（ヒーロー→防災→お知らせ→LINE登録→クイックナビ→プレビュー）
  * PC: 2カラム。左=読み物（ヒーロー・お知らせ）、右=行動（LINE登録・ナビ・プレビュー）
  */
+async function getDisasterFeed(): Promise<DisasterFeedItem[]> {
+  try {
+    const res = await fetch(
+      "https://izumi-chonaikai-workers.cs-support.workers.dev/api/v1/disaster-feed",
+      { next: { revalidate: 600 } },
+    );
+    if (!res.ok) return [];
+    const data = (await res.json()) as { items?: DisasterFeedItem[] };
+    return data.items ?? [];
+  } catch {
+    return [];
+  }
+}
+
 export default async function HomePage() {
-  const newsRaw = await getNews({ perPage: HOME_NEWS_LIMIT });
+  const [newsRaw, disasterItems] = await Promise.all([
+    getNews({ perPage: HOME_NEWS_LIMIT }),
+    getDisasterFeed(),
+  ]);
   const news = sortByPinAndDate(newsRaw).slice(0, HOME_NEWS_LIMIT);
 
   return (
@@ -42,7 +58,7 @@ export default async function HomePage() {
       <Header />
       <main className="mx-auto w-full max-w-[430px] flex-1 px-5 py-6 pb-28 lg:max-w-5xl lg:px-8 lg:py-10 lg:pb-16">
         <div className="space-y-6">
-          <DisasterAlert alerts={mockDisasterAlerts} />
+          <DisasterAlert items={disasterItems} />
           <div className="space-y-6 lg:grid lg:grid-cols-[1fr_320px] lg:items-start lg:gap-8 lg:space-y-0">
             <div className="space-y-6">
               <HeroSection />

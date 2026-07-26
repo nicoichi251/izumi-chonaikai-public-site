@@ -1,40 +1,43 @@
 import { Rss } from "lucide-react";
-import type { DisasterAlert as DisasterAlertItem } from "@/types";
 
-type Props = {
-  alerts: DisasterAlertItem[];
+export type DisasterFeedItem = {
+  title: string;
+  link: string | null;
+  pub_date: string | null;
 };
 
 /**
- * 札幌市防災RSSのプレースホルダ表示。
- * Phase 2 で実 RSS を fetch する想定（Cloudflare Workers 経由）。
+ * 札幌市等の防災RSS（workersプロキシ経由）。
+ * フィード未設定・取得失敗・0件ならセクションごと出さない。
  */
-export function DisasterAlert({ alerts }: Props) {
-  if (alerts.length === 0) {
-    return null;
-  }
+export function DisasterAlert({ items }: { items: DisasterFeedItem[] }) {
+  if (items.length === 0) return null;
 
   return (
     <section
-      aria-label="札幌市 防災情報"
-      className="bg-white border border-alert-orange/50 rounded-xl p-6 shadow-card"
+      aria-label="防災情報"
+      className="rounded-xl border border-alert-orange/50 bg-white p-5 shadow-card"
     >
-      <div className="flex items-center gap-2 mb-4 text-orange-700">
+      <div className="mb-3 flex items-center gap-2 text-orange-700">
         <Rss size={16} aria-hidden />
-        <h3 className="font-black text-xs tracking-wide">
-          札幌市 防災RSS
-        </h3>
+        <h3 className="text-sm font-black">防災情報</h3>
       </div>
-      <ul className="space-y-3">
-        {alerts.map((alert) => (
-          <li key={alert.id} className="flex items-start gap-3">
-            <span
-              aria-hidden
-              className="w-1.5 h-1.5 bg-red-500 rounded-full mt-1.5 animate-pulse shrink-0"
-            />
-            <p className="text-xs font-bold text-stone-700 leading-snug">
-              {alert.message}
-            </p>
+      <ul className="space-y-2.5">
+        {items.map((item, i) => (
+          <li key={i} className="flex items-start gap-3">
+            <span aria-hidden className="mt-1.5 h-1.5 w-1.5 shrink-0 animate-pulse rounded-full bg-red-500" />
+            {item.link ? (
+              <a
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-bold leading-snug text-stone-700 underline-offset-2 hover:text-primary hover:underline"
+              >
+                {item.title}
+              </a>
+            ) : (
+              <p className="text-sm font-bold leading-snug text-stone-700">{item.title}</p>
+            )}
           </li>
         ))}
       </ul>
