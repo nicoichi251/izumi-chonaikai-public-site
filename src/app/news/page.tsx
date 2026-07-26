@@ -7,6 +7,9 @@ import { getNews } from "@/lib/wp-api";
 import { decodeHtmlEntities, stripHtml } from "@/lib/wp-format";
 import type { WpNews, WpNewsCategoryTag } from "@/types/wordpress";
 
+// D1の最新コンテンツを常に反映するため動的レンダリング（旧ISR 60sの置き換え）
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "お知らせ",
   description:
@@ -14,11 +17,11 @@ export const metadata: Metadata = {
 };
 
 const CATEGORY_BADGE: Record<WpNewsCategoryTag, { label: string; classes: string }> = {
-  important: { label: "重要", classes: "bg-red-50 text-red-600" },
-  event: { label: "行事", classes: "bg-emerald-50 text-emerald-700" },
-  disaster: { label: "防災", classes: "bg-orange-50 text-orange-700" },
-  living: { label: "生活情報", classes: "bg-sky-50 text-sky-700" },
-  info: { label: "お知らせ", classes: "bg-stone-100 text-stone-600" },
+  important: { label: "重要", classes: "border-accent-red text-accent-red" },
+  event: { label: "行事", classes: "border-primary text-primary" },
+  disaster: { label: "防災", classes: "border-alert-orange text-alert-orange" },
+  living: { label: "生活情報", classes: "border-alert-blue text-alert-blue" },
+  info: { label: "お知らせ", classes: "border-stone-300 text-stone-500" },
 };
 
 const DEFAULT_BADGE = CATEGORY_BADGE.info;
@@ -66,7 +69,7 @@ export default async function NewsListPage() {
               <li key={item.id}>
                 <Link
                   href={`/news/${item.id}`}
-                  className="block bg-white p-6 rounded-[2rem] border border-stone-100 shadow-card active:bg-stone-50 transition-colors"
+                  className="block bg-white p-5 rounded-xl border border-stone-200 shadow-card hover:border-primary/50 active:bg-stone-50 transition-colors"
                 >
                   <div className="flex items-center justify-between gap-3 mb-3">
                     <div className="flex items-center gap-2">
@@ -74,16 +77,16 @@ export default async function NewsListPage() {
                         <Pin
                           size={12}
                           aria-label="ピン留め"
-                          className="text-amber-500 shrink-0"
+                          className="text-accent-red shrink-0"
                         />
                       )}
                       <span
-                        className={`text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest ${badge.classes}`}
+                        className={`inline-flex items-center border px-2 py-0.5 text-[10px] font-black ${badge.classes}`}
                       >
                         {badge.label}
                       </span>
                     </div>
-                    <span className="text-[9px] font-bold text-stone-500 tracking-wider font-mono">
+                    <span className="text-[11px] font-bold text-stone-400 font-mono">
                       {dateText}
                     </span>
                   </div>

@@ -39,7 +39,7 @@ export default function TrashPage() {
         ))}
       </ul>
 
-      <section className="bg-orange-50 border border-orange-100 rounded-[2rem] p-6">
+      <section className="bg-white border border-alert-orange/50 rounded-xl p-6">
         <p className="text-xs text-stone-700 leading-relaxed">
           ゴミの出し方・分別方法は札幌市公式情報を引用しています。
           詳細・最新情報は必ず札幌市公式サイトをご確認ください。

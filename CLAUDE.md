@@ -2,6 +2,9 @@
 
 # CLAUDE.md — public-site（発寒泉町内会 公開HP）
 
+> **⚠ 2026-07-26 Cloudflare全面移行済み**: Vercel→Cloudflare Workers（@opennextjs/cloudflare）。ヘッドレスWPは廃止し、記事・行事はD1 `izumi-chonaikai` から取得（`src/lib/articles-db.ts`）。D1が空の間はモックにフォールバック。@vercel/analyticsは削除。本番: https://izumi-chonaikai-public-site.cs-support.workers.dev
+
+
 このファイルはセッション開始時にCCが最初に読むプロジェクト規約集です。`@AGENTS.md` で Next.js 16 の注意事項を、本書でリポジトリ固有の規約を共有します。
 
 ## 1. プロジェクト概要

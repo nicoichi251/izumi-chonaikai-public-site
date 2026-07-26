@@ -10,16 +10,17 @@ type Props = {
 
 /**
  * トップ以外の下層ページ共通シェル。
- * AppShell + Header + main + Footer + BottomNav を一箇所に集約。
+ * SP: 従来どおりの1カラム。PC: 読みやすい幅（max-w-3xl）に中央寄せ。
+ * BottomNav（SPのみ・固定）のぶん下部に余白を確保する。
  */
 export function PageShell({ children }: Props) {
   return (
     <AppShell>
       <Header />
-      <main className="flex-1 overflow-y-auto p-6 space-y-6 pb-8">
+      <main className="mx-auto w-full max-w-[430px] flex-1 space-y-6 px-5 py-6 pb-28 lg:max-w-3xl lg:px-8 lg:py-10 lg:pb-16">
         {children}
-        <Footer />
       </main>
+      <Footer />
       <BottomNav />
     </AppShell>
   );

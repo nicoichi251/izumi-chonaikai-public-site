@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ChevronRight, Pin } from "lucide-react";
+import { Pin } from "lucide-react";
 import type { WpNews, WpNewsCategoryTag } from "@/types/wordpress";
 
 type Props = {
@@ -9,16 +9,16 @@ type Props = {
 type CategoryBadge = { label: string; classes: string };
 
 const CATEGORY_BADGE: Record<WpNewsCategoryTag, CategoryBadge> = {
-  important: { label: "重要", classes: "bg-red-50 text-red-600 border-red-200" },
-  event: { label: "行事", classes: "bg-emerald-50 text-emerald-700 border-emerald-200" },
-  disaster: { label: "防災", classes: "bg-orange-50 text-orange-700 border-orange-200" },
-  living: { label: "生活情報", classes: "bg-sky-50 text-sky-700 border-sky-200" },
-  info: { label: "お知らせ", classes: "bg-stone-100 text-stone-600 border-stone-200" },
+  important: { label: "重要", classes: "border-accent-red text-accent-red" },
+  event: { label: "行事", classes: "border-primary text-primary" },
+  disaster: { label: "防災", classes: "border-alert-orange text-alert-orange" },
+  living: { label: "生活情報", classes: "border-alert-blue text-alert-blue" },
+  info: { label: "お知らせ", classes: "border-stone-300 text-stone-500" },
 };
 
 const DEFAULT_BADGE: CategoryBadge = {
   label: "お知らせ",
-  classes: "bg-stone-100 text-stone-600 border-stone-200",
+  classes: "border-stone-300 text-stone-500",
 };
 
 const resolveBadge = (tag: string | undefined): CategoryBadge => {
@@ -45,25 +45,18 @@ const decodeBasicHtmlEntities = (input: string): string =>
     .replace(/&#039;/g, "'");
 
 /**
- * 最新お知らせ × N件のカードリスト。
- * WpNews（WP REST API形）をそのまま受け取り、ピン留め優先＋公開日降順で
- * 表示する想定。詳細ページ /news/[id] は別Sprintで実装中。
+ * 最新お知らせ。広報紙の「新着欄」風に、1枚の罫線カードに行で積む。
  */
 export function LatestNews({ news }: Props) {
   return (
-    <section className="px-2" aria-label="最新のお知らせ">
-      <div className="flex justify-between items-end mb-6">
-        <h3 className="text-xl font-black text-stone-800 px-2">
-          最新のお知らせ
-        </h3>
-        <Link
-          href="/news"
-          className="text-[10px] font-black text-primary uppercase tracking-widest px-2"
-        >
-          すべて見る
+    <section aria-label="最新のお知らせ" className="space-y-2">
+      <div className="flex items-end justify-between">
+        <h3 className="text-sm font-black text-stone-900">最新のお知らせ</h3>
+        <Link href="/news" className="text-xs font-bold text-primary hover:underline">
+          一覧へ →
         </Link>
       </div>
-      <ul className="space-y-3">
+      <ul className="divide-y divide-stone-200 overflow-hidden rounded-xl border border-stone-200 bg-white">
         {news.map((item) => {
           const title = decodeBasicHtmlEntities(item.title.rendered);
           const badge = resolveBadge(item.acf?.category_tag);
@@ -73,38 +66,24 @@ export function LatestNews({ news }: Props) {
             <li key={item.id}>
               <Link
                 href={`/news/${item.id}`}
-                className="bg-white p-5 rounded-[2rem] border border-stone-100 shadow-card flex items-center gap-4 active:bg-stone-50 transition-colors"
+                className="flex items-start gap-3 px-4 py-3.5 transition-colors hover:bg-stone-50 active:bg-stone-50"
               >
-                {pinned ? (
-                  <Pin
-                    size={14}
-                    aria-label="ピン留め"
-                    className="text-amber-500 shrink-0"
-                  />
-                ) : (
+                <span className="flex shrink-0 items-center gap-1.5 pt-0.5">
+                  <time className="font-mono text-[11px] font-bold text-stone-400">
+                    {dateText}
+                  </time>
                   <span
-                    aria-hidden
-                    className="w-2 h-2 bg-primary rounded-full shrink-0"
-                  />
-                )}
-                <div className="flex-1 min-w-0">
-                  <h4 className="font-bold text-stone-800 text-sm truncate">
-                    {title}
-                  </h4>
-                  <p className="mt-1 flex items-center gap-2 text-[9px] font-bold uppercase tracking-wider text-stone-500">
-                    <span>{dateText}</span>
-                    <span
-                      className={`inline-flex items-center rounded-full border px-1.5 py-0.5 text-[8px] tracking-wider ${badge.classes}`}
-                    >
-                      {badge.label}
-                    </span>
-                  </p>
-                </div>
-                <ChevronRight
-                  size={14}
-                  aria-hidden
-                  className="text-stone-200 shrink-0"
-                />
+                    className={`inline-flex items-center border px-1.5 py-px text-[10px] font-black ${badge.classes}`}
+                  >
+                    {badge.label}
+                  </span>
+                  {pinned && (
+                    <Pin size={12} aria-label="ピン留め" className="text-accent-red" />
+                  )}
+                </span>
+                <span className="min-w-0 flex-1 text-[13px] font-bold leading-snug text-stone-800">
+                  {title}
+                </span>
               </Link>
             </li>
           );

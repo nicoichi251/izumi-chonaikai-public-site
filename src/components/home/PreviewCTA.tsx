@@ -1,34 +1,29 @@
 import Link from "next/link";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 
 /**
- * /preview への導線。本プロジェクトの差別化要素：
- * 「会員になるとどんな画面が見られるか」を公開HPで先に見せて登録動機を高める。
+ * /preview への導線。差別化要素：
+ * 「会員になるとどんな画面が見られるか」を登録前に見せて動機づける。
  */
 export function PreviewCTA() {
   return (
-    <section className="mx-2">
+    <section aria-label="会員ページのプレビュー">
       <Link
         href="/preview"
-        className="block bg-primary rounded-[3rem] p-8 shadow-lifted text-white active:scale-[0.99] transition-transform"
+        className="block rounded-xl border border-primary/30 bg-primary p-6 text-white transition-opacity hover:opacity-95"
       >
-        <div className="flex items-center gap-2 mb-3 text-emerald-200">
-          <Sparkles size={16} aria-hidden />
-          <span className="text-[10px] font-black uppercase tracking-widest">
-            Members Preview
-          </span>
-        </div>
-        <h3 className="text-2xl font-black leading-tight mb-4">
-          会員ページの
+        <p className="text-[11px] font-bold text-emerald-100/80">会員ページを先に見る</p>
+        <h3 className="mt-1.5 text-lg font-black leading-snug">
+          登録するとLINEに何が届く？
           <br />
-          中身を覗いてみる
+          実際の画面でご覧いただけます
         </h3>
-        <p className="text-sm text-emerald-100/90 leading-relaxed mb-6">
-          回覧板・行事申込・除雪情報など、LINE会員になるとどんな情報が届くのか、登録前にプレビューで確認できます。
+        <p className="mt-3 text-xs leading-relaxed text-emerald-50/90">
+          回覧板・行事申込・除雪情報など、会員だけに届く情報のプレビュー版を公開中です。
         </p>
-        <span className="inline-flex items-center gap-2 bg-white text-primary px-5 py-3 rounded-full font-black text-xs shadow-md">
+        <span className="mt-4 inline-flex items-center gap-1.5 rounded-md bg-white px-4 py-2 text-xs font-black text-primary">
           プレビューを見る
-          <ArrowRight size={14} aria-hidden />
+          <ArrowRight size={13} aria-hidden />
         </span>
       </Link>
     </section>

@@ -1,5 +1,9 @@
 import path from "node:path";
 import type { NextConfig } from "next";
+import { initOpenNextCloudflareForDev } from "@opennextjs/cloudflare";
+
+// `next dev` でも Cloudflare バインディング（D1等）を getCloudflareContext 経由で使えるようにする
+initOpenNextCloudflareForDev();
 
 const nextConfig: NextConfig = {
   // 親ディレクトリの別 lockfile を誤検出させないため、ワークスペースルートを固定。

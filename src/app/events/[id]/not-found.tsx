@@ -13,8 +13,8 @@ export default function EventNotFound() {
           { label: "行事が見つかりません" },
         ]}
       />
-      <div className="bg-white border border-stone-100 rounded-[2rem] p-8 text-center space-y-4 shadow-card">
-        <p className="text-[10px] font-black text-stone-400 uppercase tracking-widest">
+      <div className="bg-white border border-stone-100 rounded-xl p-8 text-center space-y-4 shadow-card">
+        <p className="text-[10px] font-black text-stone-400">
           404 — Not Found
         </p>
         <h1 className="text-xl font-black text-stone-800">

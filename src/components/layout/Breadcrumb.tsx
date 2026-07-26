@@ -24,14 +24,14 @@ export function Breadcrumb({ items }: Props) {
               {item.href && !isLast ? (
                 <Link
                   href={item.href}
-                  className="hover:text-primary uppercase tracking-widest"
+                  className="hover:text-primary"
                 >
                   {item.label}
                 </Link>
               ) : (
                 <span
                   aria-current={isLast ? "page" : undefined}
-                  className={`uppercase tracking-widest ${
+                  className={`${
                     isLast ? "text-stone-700" : ""
                   }`}
                 >

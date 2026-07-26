@@ -17,7 +17,7 @@ export function HanMap({ hanData }: Props) {
   const selected = hanData.find((h) => h.id === selectedId);
 
   return (
-    <div className="bg-orange-50 p-6 rounded-[2.5rem] border border-orange-100 shadow-card">
+    <div className="bg-white p-6 rounded-xl border border-alert-orange/50 shadow-card">
       <div className="grid grid-cols-4 gap-2">
         {hanData.map((han) => {
           const active = han.id === selectedId;

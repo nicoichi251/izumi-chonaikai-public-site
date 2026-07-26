@@ -57,10 +57,10 @@ export default function PreviewPage() {
       />
 
       {/* ヒーロー */}
-      <section className="bg-primary rounded-[3rem] p-8 shadow-lifted text-white">
+      <section className="bg-primary rounded-2xl p-8 shadow-card text-white">
         <div className="flex items-center gap-2 mb-3 text-emerald-200">
           <Sparkles size={16} aria-hidden />
-          <span className="text-[10px] font-black uppercase tracking-widest">
+          <span className="text-[10px] font-black">
             Members Preview
           </span>
         </div>
@@ -79,7 +79,7 @@ export default function PreviewPage() {
       {/* LINE通知の例 */}
       <section
         aria-label="LINE通知の例"
-        className="bg-emerald-50/60 rounded-[2.5rem] border border-emerald-100 p-6 space-y-5"
+        className="bg-stone-50 rounded-xl border border-stone-200 p-6 space-y-5"
       >
         <h2 className="font-black text-stone-700 text-sm flex items-center gap-2">
           <MessageCircle size={16} aria-hidden className="text-primary" />
@@ -112,7 +112,7 @@ export default function PreviewPage() {
       {/* プライバシーへの配慮 */}
       <section
         aria-label="プライバシーへの配慮"
-        className="bg-white rounded-[2.5rem] border border-stone-100 p-6 shadow-card space-y-4"
+        className="bg-white rounded-xl border border-stone-100 p-6 shadow-card space-y-4"
       >
         <h2 className="font-black text-stone-700 text-sm flex items-center gap-2">
           <ShieldCheck size={16} aria-hidden className="text-primary" />
@@ -145,7 +145,7 @@ export default function PreviewPage() {
       {/* CTA */}
       <section
         aria-label="LINE登録への導線"
-        className="bg-primary rounded-[3rem] p-8 shadow-lifted text-white text-center"
+        className="bg-primary rounded-2xl p-8 shadow-card text-white text-center"
       >
         <h2 className="text-xl font-black mb-3 leading-tight">
           準備はいいですか？

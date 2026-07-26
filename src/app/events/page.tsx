@@ -7,6 +7,9 @@ import { getEvents } from "@/lib/wp-api";
 import { decodeHtmlEntities } from "@/lib/wp-format";
 import type { WpEvent } from "@/types/wordpress";
 
+// D1の最新コンテンツを常に反映するため動的レンダリング（旧ISR 60sの置き換え）
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "行事予定",
   description:
@@ -56,20 +59,20 @@ export default async function EventsPage() {
               <li key={event.id}>
                 <Link
                   href={`/events/${event.id}`}
-                  className={`bg-white p-6 rounded-[2.5rem] border border-stone-100 flex items-center gap-4 active:bg-stone-50 transition-colors shadow-card ${canceled ? "opacity-70" : ""}`}
+                  className={`bg-white p-6 rounded-xl border border-stone-100 flex items-center gap-4 active:bg-stone-50 transition-colors shadow-card ${canceled ? "opacity-70" : ""}`}
                 >
                   <div className="text-center pr-4 border-r border-stone-100 shrink-0">
                     <p className="text-3xl font-black text-primary font-mono leading-none">
                       {day}
                     </p>
-                    <p className="text-[8px] font-black text-stone-300 uppercase tracking-widest mt-1">
+                    <p className="text-[8px] font-black text-stone-300 mt-1">
                       {month} {year}
                     </p>
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
                       {canceled && (
-                        <span className="text-[9px] font-black px-2 py-0.5 rounded-full bg-red-50 text-red-600 border border-red-200 uppercase tracking-widest">
+                        <span className="text-[9px] font-black px-2 py-0.5 rounded-sm border border-accent-red text-accent-red bg-white border border-red-200">
                           中止
                         </span>
                       )}

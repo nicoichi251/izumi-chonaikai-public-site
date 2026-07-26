@@ -25,16 +25,16 @@ const ITEMS: LivingNav[] = [
     label: "ゴミ収集日",
     caption: "Trash Schedule",
     icon: Trash2,
-    iconBg: "bg-blue-50",
-    iconColor: "text-blue-600",
+    iconBg: "bg-stone-50",
+    iconColor: "text-primary",
   },
   {
     href: "/living/han-map",
     label: "街区・班分け",
     caption: "District Guide",
     icon: Navigation,
-    iconBg: "bg-orange-50",
-    iconColor: "text-orange-600",
+    iconBg: "bg-stone-50",
+    iconColor: "text-primary",
   },
   {
     href: "/living/faq",
@@ -64,7 +64,7 @@ export default function LivingPage() {
           <li key={href}>
             <Link
               href={href}
-              className="bg-white p-7 rounded-[2.5rem] border border-stone-100 shadow-card flex items-center gap-5 active:bg-stone-50 transition-colors"
+              className="bg-white p-7 rounded-xl border border-stone-100 shadow-card flex items-center gap-5 active:bg-stone-50 transition-colors"
             >
               <span
                 aria-hidden
@@ -77,7 +77,7 @@ export default function LivingPage() {
                   {label}
                 </span>
                 <span
-                  className={`block text-[10px] font-bold tracking-widest uppercase mt-1 ${iconColor.replace("text-", "text-").replace("-600", "-300")}`}
+                  className={`block text-[10px] font-bold tracking-wide mt-1 ${iconColor.replace("text-", "text-").replace("-600", "-300")}`}
                 >
                   {caption}
                 </span>

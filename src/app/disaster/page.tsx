@@ -21,7 +21,7 @@ export default function DisasterPage() {
         防災情報
       </h1>
 
-      <section className="bg-red-50 border border-red-100 rounded-[3rem] p-8 text-center shadow-card">
+      <section className="bg-white border-2 border-alert-red/50 rounded-2xl p-8 text-center shadow-card">
         <div
           aria-hidden
           className="w-14 h-14 bg-white rounded-2xl flex items-center justify-center text-red-600 mx-auto mb-4 shadow-sm"
@@ -59,7 +59,7 @@ export default function DisasterPage() {
               className="bg-white p-5 rounded-2xl border border-stone-100 shadow-card"
             >
               <p className="font-black text-stone-800 text-sm">{site.name}</p>
-              <p className="text-[10px] font-bold text-orange-600 mt-1 uppercase tracking-widest">
+              <p className="text-[10px] font-bold text-orange-600 mt-1">
                 {site.type}
               </p>
               <p className="text-xs text-stone-500 mt-2">{site.address}</p>
@@ -83,7 +83,7 @@ export default function DisasterPage() {
               className="bg-white p-5 rounded-2xl border border-stone-100 shadow-card flex justify-between items-center"
             >
               <span className="font-black text-stone-800 text-sm">{aed.name}</span>
-              <span className="text-[10px] font-bold text-emerald-600 uppercase tracking-widest">
+              <span className="text-[10px] font-bold text-emerald-600">
                 {aed.hours}
               </span>
             </li>
@@ -95,7 +95,7 @@ export default function DisasterPage() {
         href={SAPPORO_LINKS.hazard_map}
         target="_blank"
         rel="noopener noreferrer"
-        className="block bg-orange-50 border border-orange-100 rounded-[2rem] p-6 active:bg-orange-100 transition-colors"
+        className="block bg-white border border-alert-orange/50 rounded-xl p-6 active:bg-stone-50 transition-colors"
       >
         <div className="flex items-center justify-between">
           <div>

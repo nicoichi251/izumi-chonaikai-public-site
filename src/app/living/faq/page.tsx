@@ -28,7 +28,7 @@ export default function FaqPage() {
         {mockFaqs.map((faq) => (
           <li key={faq.id}>
             {/* details/summary を使うと JS 不要のアコーディオンになる */}
-            <details className="group bg-white p-6 rounded-[2rem] border border-stone-100 shadow-card">
+            <details className="group bg-white p-6 rounded-xl border border-stone-100 shadow-card">
               <summary className="flex items-start justify-between gap-3 cursor-pointer list-none">
                 <h3 className="font-black text-primary text-sm leading-tight flex-1">
                   Q. {faq.question}

@@ -1,37 +1,48 @@
 @import "tailwindcss";
 
 /* ===========================================================
- * 発寒泉町内会 公開HP デザイントークン
- * 参照：public-site-implementation-plan-v1.0.md 第5章
+ * 発寒泉町内会 公開HP デザイントークン v2
+ * 方針：「広報紙・掲示板」の実直さ。罫線中心・角丸控えめ・
+ *       装飾英語ラベルなし・LINE導線はLINE公式色。
  * Tailwind v4 はCSSファースト設計のため、@theme で定義する。
  * ========================================================= */
 @theme {
-  /* カラー：水と緑の街・index.html のトンマナを継承 */
+  /* カラー：水と緑の街 */
   --color-primary: #2D5A27;
   --color-primary-light: #4A7A44;
   --color-primary-dark: #1F3F1B;
 
-  --color-bg-app: #FDFCF9;
-  --color-bg-pc: #E9E6DC;
+  /* LINE 公式ブランドカラー（会員登録CTA専用） */
+  --color-line: #06C755;
+  --color-line-dark: #05A847;
 
-  --color-alert-red: #EF4444;
-  --color-alert-orange: #F97316;
-  --color-alert-blue: #3B82F6;
-  --color-alert-emerald: #10B981;
+  --color-bg-app: #FDFCF9;
+  --color-bg-pc: #F5F3EC;
+
+  /* 罫線・印に使う落ち着いた朱色（重要・緊急） */
+  --color-accent-red: #B3402C;
+
+  --color-alert-red: #DC2626;
+  --color-alert-orange: #EA580C;
+  --color-alert-blue: #2563EB;
+  --color-alert-emerald: #059669;
 
   /* フォント：Noto Sans JP は next/font 経由で CSS 変数注入 */
   --font-sans: var(--font-noto-sans-jp), "Noto Sans JP", sans-serif;
 
-  /* 角丸：index.html の rounded-[2.5rem] 等の名前付け */
-  --radius-2_5xl: 1.5rem;
-  --radius-3xl: 2rem;
-  --radius-4xl: 2.5rem;
-  --radius-5xl: 3rem;
-  --radius-6xl: 3.5rem;
+  /* 角丸：全体的に控えめへ再定義（旧: 2rem〜3.5rem の「ふかふか」を廃止） */
+  --radius-lg: 0.375rem;
+  --radius-xl: 0.5rem;
+  --radius-2xl: 0.625rem;
+  --radius-3xl: 0.75rem;
+  --radius-2_5xl: 0.625rem;
+  --radius-4xl: 0.75rem;
+  --radius-5xl: 0.75rem;
+  --radius-6xl: 0.75rem;
 
-  /* 影：ふかふか感を演出 */
-  --shadow-card: 0 4px 24px -4px rgba(0, 0, 0, 0.06);
-  --shadow-lifted: 0 50px 100px -20px rgba(0, 0, 0, 0.2);
+  /* 影：ごく薄く（基本は1px罫線で区切る） */
+  --shadow-card: 0 1px 2px rgba(28, 25, 23, 0.04);
+  --shadow-lifted: 0 1px 3px rgba(28, 25, 23, 0.08);
 }
 
 html,
@@ -41,7 +52,140 @@ body {
 
 body {
   font-family: var(--font-sans);
-  background-color: var(--color-bg-pc);
+  background-color: var(--color-bg-app);
   color: #1c1917;
   -webkit-font-smoothing: antialiased;
+}
+
+/* ===========================================================
+ * 記事本文（admin の TipTap 出力 / 旧WPモックHTML を描画）
+ * 「ブロックが分かりにくい」対策：見出し・表・引用を罫線で区切り、
+ * 広報紙のように構造が目で追える組みにする。
+ * ========================================================= */
+.article-body {
+  font-size: 0.9375rem;
+  line-height: 1.9;
+  color: #292524;
+}
+
+.article-body > * + * {
+  margin-top: 0.9em;
+}
+
+.article-body h2 {
+  margin-top: 2em;
+  padding: 0.35em 0.75em;
+  border-left: 4px solid var(--color-primary);
+  background: #F4F2EA;
+  font-size: 1.0625rem;
+  font-weight: 800;
+  line-height: 1.5;
+  color: #1c1917;
+}
+
+.article-body h3 {
+  margin-top: 1.6em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #d6d3d1;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1c1917;
+}
+
+.article-body ul {
+  list-style: none;
+  padding: 0.9em 1.1em;
+  border: 1px solid #e7e5e4;
+  border-radius: 0.375rem;
+  background: #fff;
+}
+
+.article-body ul li {
+  position: relative;
+  padding-left: 1.1em;
+}
+
+.article-body ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.75em;
+  width: 0.4em;
+  height: 0.4em;
+  background: var(--color-primary);
+}
+
+.article-body ul li + li {
+  margin-top: 0.45em;
+}
+
+.article-body ol {
+  list-style: decimal;
+  padding: 0.9em 1.1em 0.9em 2.2em;
+  border: 1px solid #e7e5e4;
+  border-radius: 0.375rem;
+  background: #fff;
+}
+
+.article-body ol li + li {
+  margin-top: 0.45em;
+}
+
+.article-body blockquote {
+  padding: 0.8em 1em;
+  border-left: 3px solid #a8a29e;
+  background: #FAF9F5;
+  color: #57534e;
+}
+
+.article-body hr {
+  border: none;
+  border-top: 1px dashed #d6d3d1;
+  margin: 1.8em 0;
+}
+
+.article-body a {
+  color: var(--color-primary);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.article-body mark {
+  background: #FDE68A;
+  padding: 0 0.15em;
+}
+
+.article-body img {
+  max-width: 100%;
+  border: 1px solid #e7e5e4;
+  border-radius: 0.375rem;
+  margin: 1.2em 0;
+}
+
+.article-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.2em 0;
+  font-size: 0.875em;
+  background: #fff;
+}
+
+.article-body th,
+.article-body td {
+  border: 1px solid #d6d3d1;
+  padding: 0.5em 0.7em;
+  text-align: left;
+  vertical-align: top;
+}
+
+.article-body th {
+  background: #F4F2EA;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.article-body strong {
+  font-weight: 800;
+  color: #1c1917;
 }

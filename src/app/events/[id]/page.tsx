@@ -7,12 +7,16 @@ import {
   ChevronLeft,
   Clock,
   MapPin,
-  MessageCircle,
 } from "lucide-react";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { PageShell } from "@/components/layout/PageShell";
+import { LineJoinCard } from "@/components/home/LineJoinCard";
+import { BookLink } from "@/components/articles/BookLink";
 import { getEventById } from "@/lib/wp-api";
 import { decodeHtmlEntities, formatJpDate, formatJpTime, stripHtml } from "@/lib/wp-format";
+
+// D1の最新コンテンツを常に反映するため動的レンダリング（旧ISR 60sの置き換え）
+export const dynamic = "force-dynamic";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -20,7 +24,7 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const event = await getEventById(Number(id));
+  const event = await getEventById(id);
   if (!event) return { title: "行事が見つかりません" };
   const title = decodeHtmlEntities(event.title.rendered);
   const description = stripHtml(event.excerpt.rendered).slice(0, 120);
@@ -37,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function EventDetailPage({ params }: Props) {
   const { id } = await params;
-  const event = await getEventById(Number(id));
+  const event = await getEventById(id);
   if (!event) notFound();
 
   const title = decodeHtmlEntities(event.title.rendered);
@@ -59,26 +63,24 @@ export default async function EventDetailPage({ params }: Props) {
       />
 
       {isCanceled && (
-        <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-2xl text-sm font-black text-center">
+        <div className="rounded-md border-2 border-accent-red bg-white px-4 py-3 text-center text-sm font-black text-accent-red">
           この行事は中止になりました
         </div>
       )}
 
-      <h1 className="text-3xl font-black text-stone-800 leading-tight pt-2">
-        {title}
-      </h1>
-
-      <article
-        className="wp-content text-stone-600 leading-relaxed text-sm space-y-4"
-        dangerouslySetInnerHTML={{ __html: event.content.rendered }}
-      />
-
-      <dl className="bg-stone-50 p-6 rounded-[2rem] border border-stone-100 space-y-4">
+      {/* 行事ヘッダー + 開催情報 + 本文を1枚の枠にまとめる */}
+      <article className="overflow-hidden rounded-xl border border-stone-200 bg-white shadow-card">
+        <header className="border-b border-stone-200 bg-stone-50/60 px-5 py-4 lg:px-7">
+          <h1 className="text-xl font-black leading-snug text-stone-900 lg:text-2xl">
+            {title}
+          </h1>
+        </header>
+        <dl className="grid grid-cols-1 gap-x-6 gap-y-3 border-b border-stone-200 px-5 py-4 sm:grid-cols-2 lg:px-7">
         {dateText && (
           <div className="flex items-start gap-3">
             <CalendarDays size={16} aria-hidden className="text-primary mt-0.5 shrink-0" />
             <div>
-              <dt className="text-[10px] font-black text-stone-500 uppercase tracking-widest mb-0.5">
+              <dt className="text-[10px] font-black text-stone-500 mb-0.5">
                 開催日
               </dt>
               <dd className="font-black text-primary">{dateText}</dd>
@@ -89,7 +91,7 @@ export default async function EventDetailPage({ params }: Props) {
           <div className="flex items-start gap-3">
             <Clock size={16} aria-hidden className="text-primary mt-0.5 shrink-0" />
             <div>
-              <dt className="text-[10px] font-black text-stone-500 uppercase tracking-widest mb-0.5">
+              <dt className="text-[10px] font-black text-stone-500 mb-0.5">
                 開始時刻
               </dt>
               <dd className="font-black text-primary">{timeText}〜</dd>
@@ -100,7 +102,7 @@ export default async function EventDetailPage({ params }: Props) {
           <div className="flex items-start gap-3">
             <MapPin size={16} aria-hidden className="text-primary mt-0.5 shrink-0" />
             <div>
-              <dt className="text-[10px] font-black text-stone-500 uppercase tracking-widest mb-0.5">
+              <dt className="text-[10px] font-black text-stone-500 mb-0.5">
                 場所
               </dt>
               <dd className="font-black text-primary">{location}</dd>
@@ -111,37 +113,34 @@ export default async function EventDetailPage({ params }: Props) {
           <div className="flex items-start gap-3">
             <Building2 size={16} aria-hidden className="text-primary mt-0.5 shrink-0" />
             <div>
-              <dt className="text-[10px] font-black text-stone-500 uppercase tracking-widest mb-0.5">
+              <dt className="text-[10px] font-black text-stone-500 mb-0.5">
                 主催
               </dt>
               <dd className="font-black text-primary">{organizer}</dd>
             </div>
           </div>
         )}
-      </dl>
+        </dl>
+        <div
+          className="article-body px-5 py-5 lg:px-7 lg:py-6"
+          dangerouslySetInnerHTML={{ __html: event.content.rendered }}
+        />
+      </article>
+
+      <BookLink url={event.acf?.book_url} />
 
       {!isCanceled && signupUrl && (
         <a
           href={signupUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="block bg-primary text-white text-center py-4 rounded-2xl font-black text-sm shadow-xl active:scale-[0.99] transition-transform"
+          className="block rounded-md bg-primary py-3.5 text-center text-sm font-black text-white transition-colors hover:bg-primary-dark"
         >
           申込みフォームを開く
         </a>
       )}
 
-      {!isCanceled && !signupUrl && (
-        <Link
-          href="/join"
-          className="block bg-primary text-white text-center py-4 rounded-2xl font-black text-sm shadow-xl active:scale-[0.99] transition-transform"
-        >
-          <span className="inline-flex items-center gap-2">
-            <MessageCircle size={16} aria-hidden />
-            LINEで最新情報を受け取る
-          </span>
-        </Link>
-      )}
+      {!isCanceled && !signupUrl && <LineJoinCard />}
 
       <Link
         href="/events"

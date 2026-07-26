@@ -20,7 +20,7 @@ export default function PrivacyPage() {
         プライバシーポリシー
       </h1>
 
-      <section className="bg-white rounded-[2rem] border border-stone-100 shadow-card p-8 text-center">
+      <section className="bg-white rounded-xl border border-stone-100 shadow-card p-8 text-center">
         <span
           aria-hidden
           className="w-12 h-12 bg-stone-50 text-stone-500 rounded-2xl flex items-center justify-center mx-auto mb-4"
@@ -33,7 +33,7 @@ export default function PrivacyPage() {
         </p>
       </section>
 
-      <section className="bg-emerald-50 border border-emerald-100 rounded-[2rem] p-6 space-y-3">
+      <section className="bg-stone-50 border border-stone-200 rounded-xl p-6 space-y-3">
         <p className="text-xs text-stone-700 leading-relaxed">
           公開までの間、個人情報の取扱いについては
           直接お問い合わせください。基本方針は、

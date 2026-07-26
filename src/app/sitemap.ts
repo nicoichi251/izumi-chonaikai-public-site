@@ -1,5 +1,8 @@
 import type { MetadataRoute } from "next";
-import { mockEvents, mockNews } from "@/lib/mockData";
+import { getEvents, getNews } from "@/lib/wp-api";
+
+// D1の最新コンテンツを常に反映するため動的レンダリング（旧ISR 60sの置き換え）
+export const dynamic = "force-dynamic";
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://hassamu-izumi.vercel.app";
@@ -25,8 +28,9 @@ const STATIC_PATHS: ReadonlyArray<{
   { path: "/terms",           changeFrequency: "monthly", priority: 0.3 },
 ];
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
+  const [news, events] = await Promise.all([getNews({ perPage: 100 }), getEvents({ perPage: 100 })]);
 
   const staticEntries: MetadataRoute.Sitemap = STATIC_PATHS.map(
     ({ path, changeFrequency, priority }) => ({
@@ -37,14 +41,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     }),
   );
 
-  const eventEntries: MetadataRoute.Sitemap = mockEvents.map((e) => ({
+  const eventEntries: MetadataRoute.Sitemap = events.map((e) => ({
     url: `${SITE_URL}/events/${e.id}`,
     lastModified: new Date(e.date),
     changeFrequency: "monthly",
     priority: 0.6,
   }));
 
-  const newsEntries: MetadataRoute.Sitemap = mockNews.map((n) => ({
+  const newsEntries: MetadataRoute.Sitemap = news.map((n) => ({
     url: `${SITE_URL}/news/${n.id}`,
     lastModified: new Date(n.date),
     changeFrequency: "monthly",

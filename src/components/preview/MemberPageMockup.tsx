@@ -18,11 +18,11 @@ export function MemberPageMockup() {
       className="space-y-2"
     >
       {/* スマホ枠 */}
-      <div className="mx-auto w-[280px] rounded-[2.5rem] border-[10px] border-stone-900 shadow-lifted overflow-hidden bg-bg-app">
+      <div className="mx-auto w-[280px] rounded-xl border-[10px] border-stone-900 shadow-card overflow-hidden bg-bg-app">
         {/* 内部スクロールビュー風 */}
         <div className="p-4 space-y-3">
           {/* 自班情報カード（最上部） */}
-          <div className="bg-emerald-50 rounded-2xl p-3 border border-emerald-100 flex items-center gap-2">
+          <div className="bg-stone-50 rounded-2xl p-3 border border-stone-200 flex items-center gap-2">
             <span
               aria-hidden
               className="w-8 h-8 bg-primary text-white rounded-xl flex items-center justify-center"
@@ -30,7 +30,7 @@ export function MemberPageMockup() {
               <Users size={14} />
             </span>
             <div>
-              <p className="text-[8px] font-black text-primary uppercase tracking-widest">
+              <p className="text-[8px] font-black text-primary">
                 マイ班
               </p>
               <p className="text-[10px] font-black text-stone-800 leading-tight">
@@ -41,7 +41,7 @@ export function MemberPageMockup() {
 
           {/* 回覧板リスト */}
           <div className="space-y-2">
-            <p className="text-[9px] font-black text-stone-500 uppercase tracking-widest px-1">
+            <p className="text-[9px] font-black text-stone-500 px-1">
               回覧板（最新）
             </p>
             {[
@@ -62,7 +62,7 @@ export function MemberPageMockup() {
                   <p className="font-black text-stone-800 text-[10px] truncate">
                     {c.title}
                   </p>
-                  <p className="text-[7px] font-bold text-stone-500 mt-0.5 tracking-widest font-mono">
+                  <p className="text-[7px] font-bold text-stone-500 mt-0.5 tracking-wide font-mono">
                     {c.date} — {c.tag}
                   </p>
                 </div>
@@ -72,7 +72,7 @@ export function MemberPageMockup() {
 
           {/* 行事申込ボタン */}
           <div className="bg-white rounded-2xl border border-stone-100 p-3">
-            <p className="text-[9px] font-black text-stone-500 uppercase tracking-widest mb-2">
+            <p className="text-[9px] font-black text-stone-500 mb-2">
               次回の行事
             </p>
             <p className="font-black text-stone-800 text-[11px] mb-2">

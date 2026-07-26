@@ -63,7 +63,8 @@ export type WpEmbedded = {
  * WP標準の投稿フィールドのうち、フロントで利用するものに絞り込んでいる。
  */
 export type WpPost<TAcf = Record<string, unknown>, TType extends string = string> = {
-  id: number;
+  // number = 旧WP/モックの投稿ID、string = D1のUUID
+  id: number | string;
   date: string;
   date_gmt: string;
   modified: string;
@@ -101,6 +102,8 @@ export type WpNewsAcf = {
   published_at?: string;
   category_tag?: WpNewsCategoryTag | (string & {});
   is_pinned?: boolean;
+  /** NICO BOOK（デジタルブック）のURL */
+  book_url?: string;
 };
 
 export type WpNews = WpPost<WpNewsAcf, "news">;
@@ -145,6 +148,8 @@ export type WpEventAcf = {
   event_organizer?: string;
   signup_url?: string;
   is_canceled?: boolean;
+  /** NICO BOOK（デジタルブック）のURL */
+  book_url?: string;
 };
 
 export type WpEvent = WpPost<WpEventAcf, "events">;

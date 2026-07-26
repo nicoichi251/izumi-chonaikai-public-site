@@ -62,17 +62,17 @@ export default function JoinPage() {
             return (
               <li
                 key={s.title}
-                className="bg-white rounded-2xl border border-stone-100 shadow-card p-5 flex items-start gap-4"
+                className="bg-white rounded-2xl border border-stone-200 shadow-card p-5 flex items-start gap-4"
               >
                 <div className="flex flex-col items-center gap-1 shrink-0">
                   <span
                     aria-hidden
-                    className="w-10 h-10 bg-emerald-50 text-primary rounded-2xl flex items-center justify-center"
+                    className="w-10 h-10 border border-stone-200 bg-stone-50 text-primary rounded-md flex items-center justify-center"
                   >
                     <Icon size={18} />
                   </span>
-                  <span className="text-[8px] font-black text-stone-500 tracking-widest font-mono">
-                    STEP {idx + 1}
+                  <span className="text-[10px] font-black text-stone-500">
+                    手順{idx + 1}
                   </span>
                 </div>
                 <div className="flex-1 min-w-0">
@@ -111,7 +111,7 @@ export default function JoinPage() {
                 <span className="text-2xl font-black text-stone-500 leading-none">
                   {han.id}
                 </span>
-                <span className="text-[7px] font-black text-stone-500 uppercase tracking-widest mt-1">
+                <span className="text-[7px] font-black text-stone-500 mt-1">
                   QR (仮)
                 </span>
               </div>
@@ -127,7 +127,7 @@ export default function JoinPage() {
 
         <Link
           href="/living/han-map"
-          className="block bg-orange-50 border border-orange-100 rounded-2xl p-4 active:bg-orange-100 transition-colors"
+          className="block bg-white border border-alert-orange/50 rounded-2xl p-4 active:bg-stone-50 transition-colors"
         >
           <div className="flex items-center gap-3">
             <span
@@ -151,7 +151,7 @@ export default function JoinPage() {
       {/* 注意事項 */}
       <section
         aria-label="注意事項"
-        className="bg-white rounded-[2rem] border border-stone-100 p-6 shadow-card space-y-3"
+        className="bg-white rounded-xl border border-stone-100 p-6 shadow-card space-y-3"
       >
         <h2 className="font-black text-stone-700 text-sm">注意事項</h2>
         <ul className="space-y-2 text-[11px] text-stone-600 leading-relaxed">
@@ -171,7 +171,7 @@ export default function JoinPage() {
       </section>
 
       {/* プラポリ・利用規約への明示的リンク */}
-      <section className="bg-emerald-50 border border-emerald-100 rounded-[2rem] p-6">
+      <section className="bg-stone-50 border border-stone-200 rounded-xl p-6">
         <p className="text-xs text-stone-700 leading-relaxed mb-3">
           ご登録の前に、以下の文書も合わせてご確認ください。
         </p>

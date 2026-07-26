@@ -19,8 +19,8 @@ export default function AboutPage() {
         町内会について
       </h1>
 
-      <section className="bg-white rounded-[2.5rem] p-8 shadow-card border border-stone-100">
-        <h2 className="font-black text-primary text-sm uppercase tracking-widest mb-3">
+      <section className="bg-white rounded-xl p-8 shadow-card border border-stone-100">
+        <h2 className="font-black text-primary text-sm mb-3">
           {CHONAIKAI_NAME} とは
         </h2>
         <p className="text-sm text-stone-600 leading-relaxed">
@@ -30,8 +30,8 @@ export default function AboutPage() {
         </p>
       </section>
 
-      <section className="bg-white rounded-[2.5rem] p-8 shadow-card border border-stone-100">
-        <h2 className="font-black text-primary text-sm uppercase tracking-widest mb-3">
+      <section className="bg-white rounded-xl p-8 shadow-card border border-stone-100">
+        <h2 className="font-black text-primary text-sm mb-3">
           エリア
         </h2>
         <p className="text-sm text-stone-600 leading-relaxed">
@@ -41,8 +41,8 @@ export default function AboutPage() {
         </p>
       </section>
 
-      <section className="bg-white rounded-[2.5rem] p-8 shadow-card border border-stone-100">
-        <h2 className="font-black text-primary text-sm uppercase tracking-widest mb-4">
+      <section className="bg-white rounded-xl p-8 shadow-card border border-stone-100">
+        <h2 className="font-black text-primary text-sm mb-4">
           12 班の構成
         </h2>
         <ul className="grid grid-cols-2 gap-2">
@@ -64,8 +64,8 @@ export default function AboutPage() {
         </p>
       </section>
 
-      <section className="bg-emerald-50 rounded-[2.5rem] p-8 border border-emerald-100">
-        <h2 className="font-black text-primary text-sm uppercase tracking-widest mb-3">
+      <section className="bg-stone-50 rounded-xl p-8 border border-stone-200">
+        <h2 className="font-black text-primary text-sm mb-3">
           連合町内会との関係
         </h2>
         <p className="text-sm text-stone-700 leading-relaxed mb-3">
@@ -79,8 +79,8 @@ export default function AboutPage() {
         </p>
       </section>
 
-      <section className="bg-white rounded-[2.5rem] p-8 shadow-card border border-stone-100">
-        <h2 className="font-black text-primary text-sm uppercase tracking-widest mb-3">
+      <section className="bg-white rounded-xl p-8 shadow-card border border-stone-100">
+        <h2 className="font-black text-primary text-sm mb-3">
           子ども会について
         </h2>
         <p className="text-sm text-stone-600 leading-relaxed">

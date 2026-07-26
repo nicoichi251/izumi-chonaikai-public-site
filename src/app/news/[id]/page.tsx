@@ -1,23 +1,28 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronLeft, MessageCircle } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { PageShell } from "@/components/layout/PageShell";
+import { LineJoinCard } from "@/components/home/LineJoinCard";
+import { BookLink } from "@/components/articles/BookLink";
 import { getNewsById } from "@/lib/wp-api";
 import { decodeHtmlEntities, formatJpDate, stripHtml } from "@/lib/wp-format";
 import type { WpNewsCategoryTag } from "@/types/wordpress";
+
+// D1の最新コンテンツを常に反映するため動的レンダリング（旧ISR 60sの置き換え）
+export const dynamic = "force-dynamic";
 
 type Props = {
   params: Promise<{ id: string }>;
 };
 
 const CATEGORY_BADGE: Record<WpNewsCategoryTag, { label: string; classes: string }> = {
-  important: { label: "重要", classes: "bg-red-50 text-red-600" },
-  event: { label: "行事", classes: "bg-emerald-50 text-emerald-700" },
-  disaster: { label: "防災", classes: "bg-orange-50 text-orange-700" },
-  living: { label: "生活情報", classes: "bg-sky-50 text-sky-700" },
-  info: { label: "お知らせ", classes: "bg-stone-100 text-stone-600" },
+  important: { label: "重要", classes: "border-accent-red text-accent-red" },
+  event: { label: "行事", classes: "border-primary text-primary" },
+  disaster: { label: "防災", classes: "border-alert-orange text-alert-orange" },
+  living: { label: "生活情報", classes: "border-alert-blue text-alert-blue" },
+  info: { label: "お知らせ", classes: "border-stone-300 text-stone-500" },
 };
 
 const DEFAULT_BADGE = CATEGORY_BADGE.info;
@@ -32,7 +37,7 @@ const CATEGORY_RELATED_LINK: Record<WpNewsCategoryTag, { href: string; label: st
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { id } = await params;
-  const news = await getNewsById(Number(id));
+  const news = await getNewsById(id);
   if (!news) return { title: "記事が見つかりません" };
   const title = decodeHtmlEntities(news.title.rendered);
   const description = stripHtml(news.excerpt.rendered).slice(0, 120);
@@ -49,7 +54,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function NewsDetailPage({ params }: Props) {
   const { id } = await params;
-  const news = await getNewsById(Number(id));
+  const news = await getNewsById(id);
   if (!news) notFound();
 
   const title = decodeHtmlEntities(news.title.rendered);
@@ -68,28 +73,33 @@ export default async function NewsDetailPage({ params }: Props) {
         ]}
       />
 
-      <div className="flex items-center gap-3 pt-2">
-        <span
-          className={`text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest ${badge.classes}`}
-        >
-          {badge.label}
-        </span>
-        <span className="text-[10px] font-bold text-stone-500 tracking-wider font-mono">
-          {dateText}
-        </span>
-      </div>
+      {/* 記事ヘッダー + 本文：広報紙の記事のように1枚の枠にまとめる */}
+      <article className="overflow-hidden rounded-xl border border-stone-200 bg-white shadow-card">
+        <header className="border-b border-stone-200 bg-stone-50/60 px-5 py-4 lg:px-7">
+          <div className="flex items-center gap-2.5">
+            <span
+              className={`inline-flex items-center border px-2 py-0.5 text-[11px] font-black ${badge.classes}`}
+            >
+              {badge.label}
+            </span>
+            <time className="font-mono text-xs font-bold text-stone-500">{dateText}</time>
+          </div>
+          <h1 className="mt-2.5 text-xl font-black leading-snug text-stone-900 lg:text-2xl">
+            {title}
+          </h1>
+        </header>
+        <div
+          className="article-body px-5 py-5 lg:px-7 lg:py-6"
+          dangerouslySetInnerHTML={{ __html: news.content.rendered }}
+        />
+      </article>
 
-      <h1 className="text-2xl font-black text-stone-800 leading-tight">
-        {title}
-      </h1>
+      <BookLink url={news.acf?.book_url} />
 
-      <article
-        className="wp-content space-y-4 text-sm text-stone-600 leading-relaxed"
-        dangerouslySetInnerHTML={{ __html: news.content.rendered }}
-      />
+      <LineJoinCard />
 
-      <section className="bg-emerald-50 border border-emerald-100 rounded-[2rem] p-6">
-        <h2 className="text-[10px] font-black text-primary uppercase tracking-widest mb-3">
+      <section className="rounded-xl border border-stone-200 bg-white p-5">
+        <h2 className="mb-3 border-l-4 border-primary pl-2.5 text-xs font-black text-stone-900">
           関連リンク
         </h2>
         <ul className="space-y-2">
@@ -108,15 +118,6 @@ export default async function NewsDetailPage({ params }: Props) {
             >
               <ChevronLeft size={14} aria-hidden />
               お知らせ一覧へ戻る
-            </Link>
-          </li>
-          <li>
-            <Link
-              href="/join"
-              className="text-sm font-bold text-stone-700 hover:text-primary inline-flex items-center gap-1"
-            >
-              <MessageCircle size={14} aria-hidden />
-              LINEで最新情報を受け取る
             </Link>
           </li>
         </ul>

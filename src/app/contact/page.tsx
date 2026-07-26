@@ -35,11 +35,11 @@ export default function ContactPage() {
 
       <a
         href={mailtoHref}
-        className="block bg-primary text-white p-8 rounded-[3rem] shadow-lifted active:scale-[0.99] transition-transform"
+        className="block bg-primary text-white p-8 rounded-2xl shadow-card active:scale-[0.99] transition-transform"
       >
         <div className="flex items-center gap-3 mb-3">
           <Mail size={20} aria-hidden />
-          <span className="text-[10px] font-black uppercase tracking-widest text-emerald-200">
+          <span className="text-[10px] font-black text-emerald-200">
             Email
           </span>
         </div>
@@ -56,12 +56,12 @@ export default function ContactPage() {
 
       <Link
         href="/join"
-        className="block bg-white p-6 rounded-[2.5rem] border border-stone-100 shadow-card active:bg-stone-50 transition-colors"
+        className="block bg-white p-6 rounded-xl border border-stone-100 shadow-card active:bg-stone-50 transition-colors"
       >
         <div className="flex items-center gap-4">
           <span
             aria-hidden
-            className="w-12 h-12 bg-emerald-50 text-primary rounded-2xl flex items-center justify-center shadow-sm shrink-0"
+            className="w-12 h-12 bg-stone-50 text-primary rounded-2xl flex items-center justify-center shadow-sm shrink-0"
           >
             <MessageCircle />
           </span>
@@ -76,10 +76,10 @@ export default function ContactPage() {
         </div>
       </Link>
 
-      <section className="bg-red-50 border border-red-100 rounded-[2.5rem] p-6">
+      <section className="bg-white border-2 border-alert-red/50 rounded-xl p-6">
         <div className="flex items-center gap-2 mb-3 text-red-600">
           <Phone size={16} aria-hidden />
-          <h2 className="font-black text-[10px] tracking-widest uppercase">
+          <h2 className="font-black text-[10px] tracking-wide">
             緊急時はこちら
           </h2>
         </div>

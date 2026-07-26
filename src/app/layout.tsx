@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 // Noto Sans JP（400/700/900）を next/font 経由で self-host
@@ -83,7 +82,6 @@ export default function RootLayout({
     <html lang="ja" className={`${notoSansJP.variable} h-full`}>
       <body className="min-h-full">
         {children}
-        <Analytics />
       </body>
     </html>
   );
