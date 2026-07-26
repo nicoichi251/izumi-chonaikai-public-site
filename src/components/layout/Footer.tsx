@@ -13,6 +13,7 @@ const SITE_LINKS = [
 ] as const;
 
 const LEGAL_LINKS = [
+  { href: "/sitemap", label: "サイトマップ" },
   { href: "/privacy", label: "プライバシーポリシー" },
   { href: "/terms", label: "利用規約" },
   { href: "/contact", label: "お問い合わせ" },
