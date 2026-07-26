@@ -12,6 +12,7 @@ import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { PageShell } from "@/components/layout/PageShell";
 import { LineJoinCard } from "@/components/home/LineJoinCard";
 import { BookLink } from "@/components/articles/BookLink";
+import { AlbumLink } from "@/components/articles/AlbumLink";
 import { getEventById } from "@/lib/wp-api";
 import { decodeHtmlEntities, formatJpDate, formatJpTime, stripHtml } from "@/lib/wp-format";
 
@@ -128,6 +129,8 @@ export default async function EventDetailPage({ params }: Props) {
       </article>
 
       <BookLink url={event.acf?.book_url} />
+
+      <AlbumLink albumId={event.acf?.album_id} />
 
       {!isCanceled && signupUrl && (
         <a

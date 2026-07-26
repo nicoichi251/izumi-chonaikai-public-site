@@ -21,6 +21,7 @@ type NewsRow = {
   visibility: string;
   published_at: string | null;
   book_url: string | null;
+  album_id: string | null;
   created_at: string;
   updated_at: string;
 };
@@ -34,6 +35,7 @@ type EventRow = {
   registration_enabled: number;
   visibility: string;
   book_url: string | null;
+  album_id: string | null;
   created_at: string;
   updated_at: string;
 };
@@ -84,6 +86,7 @@ function newsRowToWp(row: NewsRow): WpNews {
       category_tag: CATEGORY_TO_TAG[row.category] ?? "info",
       is_pinned: false,
       book_url: row.book_url ?? undefined,
+      album_id: row.album_id ?? undefined,
     },
   };
 }
@@ -108,6 +111,7 @@ function eventRowToWp(row: EventRow): WpEvent {
       event_location: row.location ?? undefined,
       is_canceled: false,
       book_url: row.book_url ?? undefined,
+      album_id: row.album_id ?? undefined,
     },
   };
 }
@@ -119,7 +123,7 @@ export async function dbGetNews(limit: number): Promise<WpNews[] | null> {
   if (!db) return null;
   const { results } = await db
     .prepare(
-      `select id, title, body, category, visibility, published_at, book_url, created_at, updated_at
+      `select id, title, body, category, visibility, published_at, book_url, album_id, created_at, updated_at
        from news where ${PUBLIC_NEWS_WHERE}
        order by coalesce(published_at, created_at) desc limit ?1`,
     )
@@ -133,7 +137,7 @@ export async function dbGetNewsById(id: string): Promise<WpNews | null | "no-db"
   if (!db) return "no-db";
   const row = await db
     .prepare(
-      `select id, title, body, category, visibility, published_at, book_url, created_at, updated_at
+      `select id, title, body, category, visibility, published_at, book_url, album_id, created_at, updated_at
        from news where id = ?1 and ${PUBLIC_NEWS_WHERE} limit 1`,
     )
     .bind(id)
@@ -146,7 +150,7 @@ export async function dbGetEvents(limit: number): Promise<WpEvent[] | null> {
   if (!db) return null;
   const { results } = await db
     .prepare(
-      `select id, title, body, event_date, location, registration_enabled, visibility, book_url, created_at, updated_at
+      `select id, title, body, event_date, location, registration_enabled, visibility, book_url, album_id, created_at, updated_at
        from events where ${PUBLIC_NEWS_WHERE}
        order by event_date desc limit ?1`,
     )
@@ -160,7 +164,7 @@ export async function dbGetEventById(id: string): Promise<WpEvent | null | "no-d
   if (!db) return "no-db";
   const row = await db
     .prepare(
-      `select id, title, body, event_date, location, registration_enabled, visibility, book_url, created_at, updated_at
+      `select id, title, body, event_date, location, registration_enabled, visibility, book_url, album_id, created_at, updated_at
        from events where id = ?1 and ${PUBLIC_NEWS_WHERE} limit 1`,
     )
     .bind(id)
@@ -189,7 +193,7 @@ export async function dbSearchArticles(query: string, limit = 30): Promise<Searc
   const [newsRes, eventsRes] = await Promise.all([
     db
       .prepare(
-        `select id, title, body, category, visibility, published_at, book_url, created_at, updated_at
+        `select id, title, body, category, visibility, published_at, book_url, album_id, created_at, updated_at
          from news where ${PUBLIC_NEWS_WHERE}
            and (title like ?1 escape '\\' or body like ?1 escape '\\')
          order by coalesce(published_at, created_at) desc limit ?2`,
@@ -198,7 +202,7 @@ export async function dbSearchArticles(query: string, limit = 30): Promise<Searc
       .all<NewsRow>(),
     db
       .prepare(
-        `select id, title, body, event_date, location, registration_enabled, visibility, book_url, created_at, updated_at
+        `select id, title, body, event_date, location, registration_enabled, visibility, book_url, album_id, created_at, updated_at
          from events where ${PUBLIC_NEWS_WHERE}
            and (title like ?1 escape '\\' or body like ?1 escape '\\')
          order by event_date desc limit ?2`,

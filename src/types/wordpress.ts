@@ -104,6 +104,8 @@ export type WpNewsAcf = {
   is_pinned?: boolean;
   /** NICO BOOK（デジタルブック）のURL */
   book_url?: string;
+  /** 添付アルバムID（LINE会員限定ギャラリー） */
+  album_id?: string;
 };
 
 export type WpNews = WpPost<WpNewsAcf, "news">;
@@ -150,6 +152,8 @@ export type WpEventAcf = {
   is_canceled?: boolean;
   /** NICO BOOK（デジタルブック）のURL */
   book_url?: string;
+  /** 添付アルバムID（LINE会員限定ギャラリー） */
+  album_id?: string;
 };
 
 export type WpEvent = WpPost<WpEventAcf, "events">;

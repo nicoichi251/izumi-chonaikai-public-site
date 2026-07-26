@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { PageShell } from "@/components/layout/PageShell";
 import { LineJoinCard } from "@/components/home/LineJoinCard";
 import { BookLink } from "@/components/articles/BookLink";
+import { AlbumLink } from "@/components/articles/AlbumLink";
 import { getNewsById } from "@/lib/wp-api";
 import { decodeHtmlEntities, formatJpDate, stripHtml } from "@/lib/wp-format";
 import type { WpNewsCategoryTag } from "@/types/wordpress";
@@ -95,6 +96,8 @@ export default async function NewsDetailPage({ params }: Props) {
       </article>
 
       <BookLink url={news.acf?.book_url} />
+
+      <AlbumLink albumId={news.acf?.album_id} />
 
       <LineJoinCard />
 
