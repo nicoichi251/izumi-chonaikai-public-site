@@ -7,6 +7,7 @@ const SITE_LINKS = [
   { href: "/events", label: "行事予定" },
   { href: "/living", label: "生活便利帳" },
   { href: "/disaster", label: "防災情報" },
+  { href: "/archive", label: "広報アーカイブ" },
   { href: "/about", label: "町内会について" },
   { href: "/search", label: "サイト内検索" },
 ] as const;

@@ -218,3 +218,23 @@ export async function dbSearchArticles(query: string, limit = 30): Promise<Searc
     events: eventsRes.results.map(eventRowToWp),
   };
 }
+
+export type ArchiveEntry = {
+  id: string;
+  title: string;
+  issue_date: string;
+  book_url: string;
+};
+
+/** 広報アーカイブ（公開分のみ）。D1が無い環境では空配列 */
+export async function dbGetArchives(): Promise<ArchiveEntry[]> {
+  const db = await getDb();
+  if (!db) return [];
+  const { results } = await db
+    .prepare(
+      `select id, title, issue_date, book_url from archives
+       where published = 1 order by issue_date desc limit 300`,
+    )
+    .all<ArchiveEntry>();
+  return results;
+}
