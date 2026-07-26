@@ -154,6 +154,8 @@ export type WpEventAcf = {
   book_url?: string;
   /** 添付アルバムID（LINE会員限定ギャラリー） */
   album_id?: string;
+  /** LINE会員向け申込フォームの有無（LIFF側で申込） */
+  has_line_form?: boolean;
 };
 
 export type WpEvent = WpPost<WpEventAcf, "events">;

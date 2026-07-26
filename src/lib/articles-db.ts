@@ -33,6 +33,7 @@ type EventRow = {
   event_date: string;
   location: string | null;
   registration_enabled: number;
+  show_form: number;
   visibility: string;
   book_url: string | null;
   album_id: string | null;
@@ -112,6 +113,7 @@ function eventRowToWp(row: EventRow): WpEvent {
       is_canceled: false,
       book_url: row.book_url ?? undefined,
       album_id: row.album_id ?? undefined,
+      has_line_form: row.show_form === 1 && row.registration_enabled === 1,
     },
   };
 }
@@ -150,7 +152,7 @@ export async function dbGetEvents(limit: number): Promise<WpEvent[] | null> {
   if (!db) return null;
   const { results } = await db
     .prepare(
-      `select id, title, body, event_date, location, registration_enabled, visibility, book_url, album_id, created_at, updated_at
+      `select id, title, body, event_date, location, registration_enabled, show_form, visibility, book_url, album_id, created_at, updated_at
        from events where ${PUBLIC_NEWS_WHERE}
        order by event_date desc limit ?1`,
     )
@@ -164,7 +166,7 @@ export async function dbGetEventById(id: string): Promise<WpEvent | null | "no-d
   if (!db) return "no-db";
   const row = await db
     .prepare(
-      `select id, title, body, event_date, location, registration_enabled, visibility, book_url, album_id, created_at, updated_at
+      `select id, title, body, event_date, location, registration_enabled, show_form, visibility, book_url, album_id, created_at, updated_at
        from events where id = ?1 and ${PUBLIC_NEWS_WHERE} limit 1`,
     )
     .bind(id)
@@ -202,7 +204,7 @@ export async function dbSearchArticles(query: string, limit = 30): Promise<Searc
       .all<NewsRow>(),
     db
       .prepare(
-        `select id, title, body, event_date, location, registration_enabled, visibility, book_url, album_id, created_at, updated_at
+        `select id, title, body, event_date, location, registration_enabled, show_form, visibility, book_url, album_id, created_at, updated_at
          from events where ${PUBLIC_NEWS_WHERE}
            and (title like ?1 escape '\\' or body like ?1 escape '\\')
          order by event_date desc limit ?2`,

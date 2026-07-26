@@ -11,6 +11,7 @@ import {
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { PageShell } from "@/components/layout/PageShell";
 import { LineJoinCard } from "@/components/home/LineJoinCard";
+import { MEMBER_PAGE_URL } from "@/lib/site";
 import { BookLink } from "@/components/articles/BookLink";
 import { AlbumLink } from "@/components/articles/AlbumLink";
 import { getEventById } from "@/lib/wp-api";
@@ -131,6 +132,18 @@ export default async function EventDetailPage({ params }: Props) {
       <BookLink url={event.acf?.book_url} />
 
       <AlbumLink albumId={event.acf?.album_id} />
+
+      {!isCanceled && event.acf?.has_line_form && (
+        <a
+          href={`${MEMBER_PAGE_URL}/events?event=${event.id}`}
+          className="block rounded-md bg-line py-4 text-center text-sm font-black text-white transition-colors hover:bg-line-dark"
+        >
+          LINEで参加申し込みをする
+          <span className="mt-1 block text-[10px] font-bold text-white/80">
+            LINEアプリが開きます ・ 未登録の方は約30秒の会員登録へご案内します
+          </span>
+        </a>
+      )}
 
       {!isCanceled && signupUrl && (
         <a
