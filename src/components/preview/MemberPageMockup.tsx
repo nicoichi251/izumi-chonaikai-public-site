@@ -30,10 +30,10 @@ export function MemberPageMockup() {
               <Users size={14} />
             </span>
             <div>
-              <p className="text-[8px] font-black text-primary">
+              <p className="text-[11px] font-black text-primary">
                 マイ班
               </p>
-              <p className="text-[10px] font-black text-stone-800 leading-tight">
+              <p className="text-xs font-black text-stone-800 leading-tight">
                 4班 / 町内会館周辺
               </p>
             </div>
@@ -41,7 +41,7 @@ export function MemberPageMockup() {
 
           {/* 回覧板リスト */}
           <div className="space-y-2">
-            <p className="text-[9px] font-black text-stone-500 px-1">
+            <p className="text-[11px] font-black text-stone-500 px-1">
               回覧板（最新）
             </p>
             {[
@@ -59,7 +59,7 @@ export function MemberPageMockup() {
                   <FileText size={12} />
                 </span>
                 <div className="flex-1 min-w-0">
-                  <p className="font-black text-stone-800 text-[10px] truncate">
+                  <p className="font-black text-stone-800 text-xs truncate">
                     {c.title}
                   </p>
                   <p className="text-[7px] font-bold text-stone-500 mt-0.5 tracking-wide font-mono">
@@ -72,17 +72,17 @@ export function MemberPageMockup() {
 
           {/* 行事申込ボタン */}
           <div className="bg-white rounded-2xl border border-stone-100 p-3">
-            <p className="text-[9px] font-black text-stone-500 mb-2">
+            <p className="text-[11px] font-black text-stone-500 mb-2">
               次回の行事
             </p>
-            <p className="font-black text-stone-800 text-[11px] mb-2">
+            <p className="font-black text-stone-800 text-xs mb-2">
               新春もちつき大会
             </p>
             <button
               type="button"
               tabIndex={-1}
               aria-hidden
-              className="w-full bg-primary text-white py-2 rounded-full font-black text-[9px] flex items-center justify-center gap-1"
+              className="w-full bg-primary text-white py-2 rounded-full font-black text-[11px] flex items-center justify-center gap-1"
             >
               <CalendarPlus size={10} />
               申込みする
@@ -91,7 +91,7 @@ export function MemberPageMockup() {
         </div>
       </div>
 
-      <figcaption className="text-center text-[10px] text-stone-500 font-bold">
+      <figcaption className="text-center text-xs text-stone-500 font-bold">
         ※ これはイメージです
       </figcaption>
     </figure>

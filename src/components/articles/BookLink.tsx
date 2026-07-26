@@ -20,10 +20,10 @@ export function BookLink({ url }: { url?: string }) {
         <BookOpen size={17} />
       </span>
       <span className="min-w-0 flex-1">
-        <span className="block text-[13px] font-black text-stone-800">
+        <span className="block text-sm font-black text-stone-800">
           デジタルブックで読む
         </span>
-        <span className="mt-0.5 block text-[11px] text-stone-500">
+        <span className="mt-0.5 block text-xs text-stone-500">
           紙面をそのまま、ページをめくって閲覧できます
         </span>
       </span>

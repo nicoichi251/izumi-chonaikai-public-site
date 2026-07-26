@@ -59,14 +59,14 @@ export default function DisasterPage() {
               className="bg-white p-5 rounded-2xl border border-stone-100 shadow-card"
             >
               <p className="font-black text-stone-800 text-sm">{site.name}</p>
-              <p className="text-[10px] font-bold text-orange-600 mt-1">
+              <p className="text-xs font-bold text-orange-600 mt-1">
                 {site.type}
               </p>
               <p className="text-xs text-stone-500 mt-2">{site.address}</p>
             </li>
           ))}
         </ul>
-        <p className="text-[10px] text-stone-500 mt-3 leading-relaxed">
+        <p className="text-xs text-stone-500 mt-3 leading-relaxed">
           掲載情報はサンプルです。実際の指定避難所一覧は札幌市公式サイトをご確認ください。
         </p>
       </section>
@@ -83,7 +83,7 @@ export default function DisasterPage() {
               className="bg-white p-5 rounded-2xl border border-stone-100 shadow-card flex justify-between items-center"
             >
               <span className="font-black text-stone-800 text-sm">{aed.name}</span>
-              <span className="text-[10px] font-bold text-emerald-600">
+              <span className="text-xs font-bold text-emerald-600">
                 {aed.hours}
               </span>
             </li>
@@ -102,7 +102,7 @@ export default function DisasterPage() {
             <p className="font-black text-orange-800 text-sm">
               札幌市ハザードマップ
             </p>
-            <p className="text-[11px] text-stone-500 mt-1 leading-relaxed">
+            <p className="text-xs text-stone-500 mt-1 leading-relaxed">
               洪水・土砂災害・地震被害想定マップが閲覧できます
             </p>
           </div>

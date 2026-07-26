@@ -39,7 +39,7 @@ export default function ContactPage() {
       >
         <div className="flex items-center gap-3 mb-3">
           <Mail size={20} aria-hidden />
-          <span className="text-[10px] font-black text-emerald-200">
+          <span className="text-xs font-black text-emerald-200">
             Email
           </span>
         </div>
@@ -49,7 +49,7 @@ export default function ContactPage() {
         <p className="text-xs text-emerald-100/90 leading-relaxed mb-4">
           お使いのメールアプリが起動し、件名と入力欄が自動でセットされます。
         </p>
-        <p className="text-[10px] font-mono bg-primary-dark/40 inline-block px-3 py-1 rounded-full">
+        <p className="text-xs font-mono bg-primary-dark/40 inline-block px-3 py-1 rounded-full">
           {CONTACT_EMAIL}
         </p>
       </a>
@@ -69,7 +69,7 @@ export default function ContactPage() {
             <p className="font-black text-stone-800 text-sm">
               会員の方は LINE から
             </p>
-            <p className="text-[11px] font-bold text-stone-500 mt-1">
+            <p className="text-xs font-bold text-stone-500 mt-1">
               登録すると LINE トークから事務局へ直接連絡できます
             </p>
           </div>
@@ -79,7 +79,7 @@ export default function ContactPage() {
       <section className="bg-white border-2 border-alert-red/50 rounded-xl p-6">
         <div className="flex items-center gap-2 mb-3 text-red-600">
           <Phone size={16} aria-hidden />
-          <h2 className="font-black text-[10px] tracking-wide">
+          <h2 className="font-black text-xs tracking-wide">
             緊急時はこちら
           </h2>
         </div>
@@ -105,7 +105,7 @@ export default function ContactPage() {
         </ul>
       </section>
 
-      <p className="text-[10px] text-stone-500 leading-relaxed">
+      <p className="text-xs text-stone-500 leading-relaxed">
         ※ メールアドレスは仮設定です。役員会承認後に正式アドレスへ差し替えます。
       </p>
     </PageShell>

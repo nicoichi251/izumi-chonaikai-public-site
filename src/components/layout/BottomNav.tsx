@@ -38,7 +38,7 @@ export function BottomNav() {
               className="flex flex-col items-center gap-1 py-1.5 text-stone-500 hover:text-primary transition-colors"
             >
               <Icon size={21} aria-hidden />
-              <span className="text-[10px] font-bold">{label}</span>
+              <span className="text-xs font-bold">{label}</span>
             </Link>
           </li>
         ))}

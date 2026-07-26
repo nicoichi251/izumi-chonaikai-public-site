@@ -77,7 +77,7 @@ export default function LivingPage() {
                   {label}
                 </span>
                 <span
-                  className={`block text-[10px] font-bold tracking-wide mt-1 ${iconColor.replace("text-", "text-").replace("-600", "-300")}`}
+                  className={`block text-xs font-bold tracking-wide mt-1 ${iconColor.replace("text-", "text-").replace("-600", "-300")}`}
                 >
                   {caption}
                 </span>

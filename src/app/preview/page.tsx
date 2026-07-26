@@ -60,7 +60,7 @@ export default function PreviewPage() {
       <section className="bg-primary rounded-2xl p-8 shadow-card text-white">
         <div className="flex items-center gap-2 mb-3 text-emerald-200">
           <Sparkles size={16} aria-hidden />
-          <span className="text-[10px] font-black">
+          <span className="text-xs font-black">
             Members Preview
           </span>
         </div>
@@ -95,7 +95,7 @@ export default function PreviewPage() {
             />
           ))}
         </div>
-        <p className="text-[10px] text-stone-500 leading-relaxed">
+        <p className="text-xs text-stone-500 leading-relaxed">
           ※ 実際の文面・配信タイミングはサンプルです。
         </p>
       </section>
@@ -127,13 +127,13 @@ export default function PreviewPage() {
               <p className="font-black text-primary text-xs mb-1">
                 {idx + 1}. {p.title}
               </p>
-              <p className="text-[11px] text-stone-600 leading-relaxed">
+              <p className="text-xs text-stone-600 leading-relaxed">
                 {p.body}
               </p>
             </li>
           ))}
         </ul>
-        <p className="text-[10px] text-stone-500 leading-relaxed">
+        <p className="text-xs text-stone-500 leading-relaxed">
           詳細は{" "}
           <Link href="/privacy" className="text-primary font-bold underline">
             プライバシーポリシー
@@ -160,7 +160,7 @@ export default function PreviewPage() {
           LINEで登録する
           <ArrowRight size={16} aria-hidden />
         </Link>
-        <p className="text-[10px] text-emerald-100/80 mt-3 font-bold">
+        <p className="text-xs text-emerald-100/80 mt-3 font-bold">
           所要時間：約 30 秒
         </p>
       </section>

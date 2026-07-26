@@ -12,7 +12,7 @@ export function PreviewCTA() {
         href="/preview"
         className="block rounded-xl border border-primary/30 bg-primary p-6 text-white transition-opacity hover:opacity-95"
       >
-        <p className="text-[11px] font-bold text-emerald-100/80">会員ページを先に見る</p>
+        <p className="text-xs font-bold text-emerald-100/80">会員ページを先に見る</p>
         <h3 className="mt-1.5 text-lg font-black leading-snug">
           登録するとLINEに何が届く？
           <br />

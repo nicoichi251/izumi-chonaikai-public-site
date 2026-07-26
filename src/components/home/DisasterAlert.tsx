@@ -21,7 +21,7 @@ export function DisasterAlert({ alerts }: Props) {
     >
       <div className="flex items-center gap-2 mb-4 text-orange-700">
         <Rss size={16} aria-hidden />
-        <h3 className="font-black text-[10px] tracking-wide">
+        <h3 className="font-black text-xs tracking-wide">
           札幌市 防災RSS
         </h3>
       </div>

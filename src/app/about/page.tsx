@@ -49,7 +49,7 @@ export default function AboutPage() {
           {mockHanData.map((han) => (
             <li
               key={han.id}
-              className="bg-stone-50 rounded-2xl p-3 text-[11px] text-stone-600 leading-tight"
+              className="bg-stone-50 rounded-2xl p-3 text-xs text-stone-600 leading-tight"
             >
               <p className="font-black text-stone-800 text-xs mb-1">
                 {han.name}
@@ -59,7 +59,7 @@ export default function AboutPage() {
             </li>
           ))}
         </ul>
-        <p className="text-[10px] text-stone-500 mt-4">
+        <p className="text-xs text-stone-500 mt-4">
           班長氏名は個人情報のため公開していません。お住まいの班の班長は事務局までお問い合わせください。
         </p>
       </section>

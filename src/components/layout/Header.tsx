@@ -31,7 +31,7 @@ export function Header() {
             <span className="block text-sm font-black leading-none text-stone-900">
               発寒泉町内会
             </span>
-            <span className="mt-1 block text-[10px] font-bold leading-none text-stone-500">
+            <span className="mt-1 block text-xs font-bold leading-none text-stone-500">
               札幌市西区発寒
             </span>
           </span>
@@ -49,14 +49,14 @@ export function Header() {
             <Search
               size={14}
               aria-hidden
-              className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-stone-400"
+              className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-stone-500"
             />
             <input
               id="header-q"
               name="q"
               type="search"
               placeholder="検索"
-              className="h-9 w-full rounded-md border border-stone-200 bg-stone-50 pl-8 pr-2.5 text-xs text-stone-800 placeholder:text-stone-400 focus:border-primary focus:bg-white focus:outline-none"
+              className="h-9 w-full rounded-md border border-stone-200 bg-stone-50 pl-8 pr-2.5 text-xs text-stone-800 placeholder:text-stone-500 focus:border-primary focus:bg-white focus:outline-none"
             />
           </div>
         </form>
@@ -67,7 +67,7 @@ export function Header() {
               <li key={href}>
                 <Link
                   href={href}
-                  className="block rounded-md px-3 py-2 text-[13px] font-bold text-stone-700 hover:bg-stone-100 hover:text-primary"
+                  className="block rounded-md px-3 py-2 text-sm font-bold text-stone-700 hover:bg-stone-100 hover:text-primary"
                 >
                   {label}
                 </Link>

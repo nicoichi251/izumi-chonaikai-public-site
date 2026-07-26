@@ -53,7 +53,7 @@ export default async function SearchPage({ searchParams }: Props) {
           type="search"
           defaultValue={query}
           placeholder="例: 花火大会、盆踊り、ゴミ収集"
-          className="h-11 flex-1 rounded-md border border-stone-300 bg-white px-3.5 text-sm text-stone-800 placeholder:text-stone-400 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+          className="h-11 flex-1 rounded-md border border-stone-300 bg-white px-3.5 text-sm text-stone-800 placeholder:text-stone-500 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
         />
         <button
           type="submit"
@@ -91,7 +91,7 @@ export default async function SearchPage({ searchParams }: Props) {
                   href={`/news/${n.id}`}
                   className="block px-4 py-3.5 transition-colors hover:bg-stone-50"
                 >
-                  <p className="text-[13px] font-black leading-snug text-stone-800">
+                  <p className="text-sm font-black leading-snug text-stone-800">
                     {decodeHtmlEntities(n.title.rendered)}
                   </p>
                   <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-stone-500">
@@ -116,11 +116,11 @@ export default async function SearchPage({ searchParams }: Props) {
                   href={`/events/${e.id}`}
                   className="block px-4 py-3.5 transition-colors hover:bg-stone-50"
                 >
-                  <p className="flex items-center gap-2 text-[13px] font-black leading-snug text-stone-800">
+                  <p className="flex items-center gap-2 text-sm font-black leading-snug text-stone-800">
                     {decodeHtmlEntities(e.title.rendered)}
                   </p>
                   {e.acf?.event_date && (
-                    <p className="mt-1 flex items-center gap-1 text-[11px] font-bold text-stone-500">
+                    <p className="mt-1 flex items-center gap-1 text-xs font-bold text-stone-500">
                       <CalendarDays size={12} aria-hidden />
                       {e.acf.event_date}
                       {e.acf.event_location && ` ・ ${e.acf.event_location}`}

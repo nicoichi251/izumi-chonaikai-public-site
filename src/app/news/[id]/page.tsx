@@ -79,7 +79,7 @@ export default async function NewsDetailPage({ params }: Props) {
         <header className="border-b border-stone-200 bg-stone-50/60 px-5 py-4 lg:px-7">
           <div className="flex items-center gap-2.5">
             <span
-              className={`inline-flex items-center border px-2 py-0.5 text-[11px] font-black ${badge.classes}`}
+              className={`inline-flex items-center border px-2 py-0.5 text-xs font-black ${badge.classes}`}
             >
               {badge.label}
             </span>

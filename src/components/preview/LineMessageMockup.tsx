@@ -32,7 +32,7 @@ export function LineMessageMockup({ body, time, read }: Props) {
         泉
       </span>
       <div className="flex-1 min-w-0">
-        <p className="text-[11px] font-black text-stone-500 mb-1">
+        <p className="text-xs font-black text-stone-500 mb-1">
           発寒泉町内会
         </p>
         <div className="bg-white rounded-tl-md rounded-tr-2xl rounded-br-2xl rounded-bl-2xl border border-stone-100 shadow-card p-4">
@@ -40,7 +40,7 @@ export function LineMessageMockup({ body, time, read }: Props) {
             {body}
           </p>
         </div>
-        <div className="flex items-center gap-1.5 mt-1 text-[9px] font-bold text-stone-500">
+        <div className="flex items-center gap-1.5 mt-1 text-[11px] font-bold text-stone-500">
           {read && (
             <span className="inline-flex items-center gap-0.5 text-primary">
               <CheckCheck size={10} aria-hidden />

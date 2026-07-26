@@ -83,7 +83,7 @@ export default function JoinPage() {
                   >
                     <Icon size={18} />
                   </span>
-                  <span className="text-[10px] font-black text-stone-500">
+                  <span className="text-xs font-black text-stone-500">
                     手順{idx + 1}
                   </span>
                 </div>
@@ -91,7 +91,7 @@ export default function JoinPage() {
                   <p className="font-black text-stone-800 text-sm leading-tight">
                     {s.title}
                   </p>
-                  <p className="text-[11px] text-stone-500 mt-1.5 leading-relaxed">
+                  <p className="text-xs text-stone-500 mt-1.5 leading-relaxed">
                     {s.body}
                   </p>
                 </div>
@@ -106,7 +106,7 @@ export default function JoinPage() {
         <h2 className="font-black text-stone-700 text-sm px-2">
           班別 QR コード（仮）
         </h2>
-        <p className="text-[11px] text-stone-500 leading-relaxed px-2">
+        <p className="text-xs text-stone-500 leading-relaxed px-2">
           以下は配置イメージです。実際の QR コードは役員会承認後に差し替え予定。
         </p>
         <ul className="grid grid-cols-3 gap-3">
@@ -127,10 +127,10 @@ export default function JoinPage() {
                   QR (仮)
                 </span>
               </div>
-              <p className="font-black text-stone-800 text-[11px] leading-tight">
+              <p className="font-black text-stone-800 text-xs leading-tight">
                 {han.name}
               </p>
-              <p className="text-[9px] text-stone-500 mt-0.5 leading-tight">
+              <p className="text-[11px] text-stone-500 mt-0.5 leading-tight">
                 {han.landmark}
               </p>
             </li>
@@ -152,7 +152,7 @@ export default function JoinPage() {
               <p className="font-black text-orange-800 text-xs leading-tight">
                 自分の班がわからない方は
               </p>
-              <p className="text-[10px] text-orange-600 mt-1 font-bold">
+              <p className="text-xs text-orange-600 mt-1 font-bold">
                 街区マップで範囲とランドマークから確認 →
               </p>
             </div>
@@ -166,7 +166,7 @@ export default function JoinPage() {
         className="bg-white rounded-xl border border-stone-100 p-6 shadow-card space-y-3"
       >
         <h2 className="font-black text-stone-700 text-sm">注意事項</h2>
-        <ul className="space-y-2 text-[11px] text-stone-600 leading-relaxed">
+        <ul className="space-y-2 text-xs text-stone-600 leading-relaxed">
           <li className="flex gap-2">
             <span aria-hidden className="text-primary font-black">•</span>
             <span>登録は<strong>任意</strong>です。未登録でも町内会員としての扱いに変わりはありません。</span>

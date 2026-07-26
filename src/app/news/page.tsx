@@ -81,12 +81,12 @@ export default async function NewsListPage() {
                         />
                       )}
                       <span
-                        className={`inline-flex items-center border px-2 py-0.5 text-[10px] font-black ${badge.classes}`}
+                        className={`inline-flex items-center border px-2 py-0.5 text-xs font-black ${badge.classes}`}
                       >
                         {badge.label}
                       </span>
                     </div>
-                    <span className="text-[11px] font-bold text-stone-400 font-mono">
+                    <span className="text-xs font-bold text-stone-500 font-mono">
                       {dateText}
                     </span>
                   </div>

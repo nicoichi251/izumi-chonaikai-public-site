@@ -51,8 +51,8 @@ export function LatestNews({ news }: Props) {
   return (
     <section aria-label="最新のお知らせ" className="space-y-2">
       <div className="flex items-end justify-between">
-        <h3 className="text-sm font-black text-stone-900">最新のお知らせ</h3>
-        <Link href="/news" className="text-xs font-bold text-primary hover:underline">
+        <h3 className="border-l-4 border-primary pl-2.5 text-base font-black text-stone-900 lg:text-lg">最新のお知らせ</h3>
+        <Link href="/news" className="text-sm font-bold text-primary hover:underline">
           一覧へ →
         </Link>
       </div>
@@ -69,11 +69,11 @@ export function LatestNews({ news }: Props) {
                 className="flex items-start gap-3 px-4 py-3.5 transition-colors hover:bg-stone-50 active:bg-stone-50"
               >
                 <span className="flex shrink-0 items-center gap-1.5 pt-0.5">
-                  <time className="font-mono text-[11px] font-bold text-stone-400">
+                  <time className="font-mono text-xs font-bold text-stone-500">
                     {dateText}
                   </time>
                   <span
-                    className={`inline-flex items-center border px-1.5 py-px text-[10px] font-black ${badge.classes}`}
+                    className={`inline-flex items-center border px-1.5 py-px text-xs font-black ${badge.classes}`}
                   >
                     {badge.label}
                   </span>
@@ -81,7 +81,7 @@ export function LatestNews({ news }: Props) {
                     <Pin size={12} aria-label="ピン留め" className="text-accent-red" />
                   )}
                 </span>
-                <span className="min-w-0 flex-1 text-[13px] font-bold leading-snug text-stone-800">
+                <span className="min-w-0 flex-1 text-sm font-bold leading-snug text-stone-800">
                   {title}
                 </span>
               </Link>

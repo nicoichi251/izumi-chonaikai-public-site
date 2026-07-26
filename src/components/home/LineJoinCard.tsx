@@ -21,7 +21,7 @@ export function LineJoinCard() {
       <div className="border-b-2 border-line bg-stone-50 px-5 py-3">
         <p className="text-sm font-black text-stone-900">
           LINE会員登録のご案内
-          <span className="ml-2 align-middle text-[10px] font-bold text-stone-500">
+          <span className="ml-2 align-middle text-xs font-bold text-stone-500">
             無料・約30秒
           </span>
         </p>
@@ -29,7 +29,7 @@ export function LineJoinCard() {
       <div className="space-y-4 px-5 py-4">
         <ul className="space-y-2">
           {BENEFITS.map((b) => (
-            <li key={b} className="flex items-start gap-2 text-[13px] font-bold text-stone-700">
+            <li key={b} className="flex items-start gap-2 text-sm font-bold text-stone-700">
               <Check size={15} aria-hidden className="mt-0.5 shrink-0 text-line" />
               <span>{b}</span>
             </li>
@@ -42,12 +42,12 @@ export function LineJoinCard() {
           <MessageCircle size={16} aria-hidden />
           友だち追加して登録する
         </Link>
-        <p className="text-center text-[11px] text-stone-500">
+        <p className="text-center text-xs text-stone-500">
           <Link href="/preview" className="underline underline-offset-2 hover:text-primary">
             登録すると見られる画面を先にのぞく
           </Link>
         </p>
-        <p className="border-t border-stone-100 pt-3 text-center text-[11px] font-bold text-stone-600">
+        <p className="border-t border-stone-100 pt-3 text-center text-xs font-bold text-stone-600">
           すでに会員の方は{" "}
           <a href={MEMBER_PAGE_URL} className="text-primary underline underline-offset-2">
             LINEで会員ページを開く

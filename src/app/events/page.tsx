@@ -65,14 +65,14 @@ export default async function EventsPage() {
                     <p className="text-3xl font-black text-primary font-mono leading-none">
                       {day}
                     </p>
-                    <p className="text-[8px] font-black text-stone-300 mt-1">
+                    <p className="text-[11px] font-black text-stone-300 mt-1">
                       {month} {year}
                     </p>
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 mb-1">
                       {canceled && (
-                        <span className="text-[9px] font-black px-2 py-0.5 rounded-sm border border-accent-red text-accent-red bg-white border border-red-200">
+                        <span className="text-[11px] font-black px-2 py-0.5 rounded-sm border border-accent-red text-accent-red bg-white border border-red-200">
                           中止
                         </span>
                       )}
@@ -81,7 +81,7 @@ export default async function EventsPage() {
                       </h2>
                     </div>
                     {location && (
-                      <p className="text-[10px] text-stone-500 font-bold mt-1 flex items-center gap-1">
+                      <p className="text-xs text-stone-500 font-bold mt-1 flex items-center gap-1">
                         <MapPin size={10} aria-hidden /> {location}
                       </p>
                     )}

@@ -14,7 +14,7 @@ export default function EventNotFound() {
         ]}
       />
       <div className="bg-white border border-stone-100 rounded-xl p-8 text-center space-y-4 shadow-card">
-        <p className="text-[10px] font-black text-stone-400">
+        <p className="text-xs font-black text-stone-500">
           404 — Not Found
         </p>
         <h1 className="text-xl font-black text-stone-800">

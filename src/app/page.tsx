@@ -4,6 +4,7 @@ import { BottomNav } from "@/components/layout/BottomNav";
 import { Footer } from "@/components/layout/Footer";
 import { HeroSection } from "@/components/home/HeroSection";
 import { DisasterAlert } from "@/components/home/DisasterAlert";
+import { DigitalFeatures } from "@/components/home/DigitalFeatures";
 import { LatestNews } from "@/components/home/LatestNews";
 import { LineJoinCard } from "@/components/home/LineJoinCard";
 import { PreviewCTA } from "@/components/home/PreviewCTA";
@@ -58,6 +59,8 @@ export default async function HomePage() {
               <PreviewCTA />
             </aside>
           </div>
+
+          <DigitalFeatures />
         </div>
       </main>
       <Footer />

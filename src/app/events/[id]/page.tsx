@@ -82,7 +82,7 @@ export default async function EventDetailPage({ params }: Props) {
           <div className="flex items-start gap-3">
             <CalendarDays size={16} aria-hidden className="text-primary mt-0.5 shrink-0" />
             <div>
-              <dt className="text-[10px] font-black text-stone-500 mb-0.5">
+              <dt className="text-xs font-black text-stone-500 mb-0.5">
                 開催日
               </dt>
               <dd className="font-black text-primary">{dateText}</dd>
@@ -93,7 +93,7 @@ export default async function EventDetailPage({ params }: Props) {
           <div className="flex items-start gap-3">
             <Clock size={16} aria-hidden className="text-primary mt-0.5 shrink-0" />
             <div>
-              <dt className="text-[10px] font-black text-stone-500 mb-0.5">
+              <dt className="text-xs font-black text-stone-500 mb-0.5">
                 開始時刻
               </dt>
               <dd className="font-black text-primary">{timeText}〜</dd>
@@ -104,7 +104,7 @@ export default async function EventDetailPage({ params }: Props) {
           <div className="flex items-start gap-3">
             <MapPin size={16} aria-hidden className="text-primary mt-0.5 shrink-0" />
             <div>
-              <dt className="text-[10px] font-black text-stone-500 mb-0.5">
+              <dt className="text-xs font-black text-stone-500 mb-0.5">
                 場所
               </dt>
               <dd className="font-black text-primary">{location}</dd>
@@ -115,7 +115,7 @@ export default async function EventDetailPage({ params }: Props) {
           <div className="flex items-start gap-3">
             <Building2 size={16} aria-hidden className="text-primary mt-0.5 shrink-0" />
             <div>
-              <dt className="text-[10px] font-black text-stone-500 mb-0.5">
+              <dt className="text-xs font-black text-stone-500 mb-0.5">
                 主催
               </dt>
               <dd className="font-black text-primary">{organizer}</dd>
@@ -139,7 +139,7 @@ export default async function EventDetailPage({ params }: Props) {
           className="block rounded-md bg-line py-4 text-center text-sm font-black text-white transition-colors hover:bg-line-dark"
         >
           LINEで参加申し込みをする
-          <span className="mt-1 block text-[10px] font-bold text-white/80">
+          <span className="mt-1 block text-xs font-bold text-white/80">
             LINEアプリが開きます ・ 未登録の方は約30秒の会員登録へご案内します
           </span>
         </a>
