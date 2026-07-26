@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Check, MessageCircle } from "lucide-react";
+import { MEMBER_PAGE_URL } from "@/lib/site";
 
 const BENEFITS = [
   "回覧板がスマホに届き、ワンタップで「確認」",
@@ -45,6 +46,12 @@ export function LineJoinCard() {
           <Link href="/preview" className="underline underline-offset-2 hover:text-primary">
             登録すると見られる画面を先にのぞく
           </Link>
+        </p>
+        <p className="border-t border-stone-100 pt-3 text-center text-[11px] font-bold text-stone-600">
+          すでに会員の方は{" "}
+          <a href={MEMBER_PAGE_URL} className="text-primary underline underline-offset-2">
+            LINEで会員ページを開く
+          </a>
         </p>
       </div>
     </section>

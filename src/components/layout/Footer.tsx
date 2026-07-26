@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { MessageCircle } from "lucide-react";
+import { MEMBER_PAGE_URL } from "@/lib/site";
 
 /**
  * フッター：LINE登録の再訴求 + 規約リンク + 著作権表記。
@@ -19,13 +20,21 @@ export function Footer() {
               登録は約30秒・無料。班ごとのQRコードからどうぞ。
             </p>
           </div>
-          <Link
-            href="/join"
-            className="inline-flex items-center gap-1.5 rounded-md bg-line px-4 py-2.5 text-xs font-black text-white transition-colors hover:bg-line-dark"
-          >
-            <MessageCircle size={14} aria-hidden />
-            LINE会員登録はこちら
-          </Link>
+          <div className="flex flex-wrap items-center gap-2.5">
+            <Link
+              href="/join"
+              className="inline-flex items-center gap-1.5 rounded-md bg-line px-4 py-2.5 text-xs font-black text-white transition-colors hover:bg-line-dark"
+            >
+              <MessageCircle size={14} aria-hidden />
+              LINE会員登録はこちら
+            </Link>
+            <a
+              href={MEMBER_PAGE_URL}
+              className="inline-flex items-center rounded-md border border-stone-300 px-4 py-2.5 text-xs font-black text-stone-700 transition-colors hover:border-primary hover:text-primary"
+            >
+              会員の方はこちら
+            </a>
+          </div>
         </div>
         <div className="flex flex-col items-center gap-3 pt-6 text-[11px] text-stone-500 lg:flex-row lg:justify-between">
           <div className="flex flex-wrap justify-center gap-x-4 gap-y-1">

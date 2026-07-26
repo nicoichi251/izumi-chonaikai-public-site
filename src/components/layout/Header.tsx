@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { MessageCircle, Search } from "lucide-react";
+import { MessageCircle, Search, UserRound } from "lucide-react";
+import { MEMBER_PAGE_URL } from "@/lib/site";
 
 const NAV_ITEMS = [
   { href: "/news", label: "お知らせ" },
@@ -84,9 +85,18 @@ export function Header() {
           <Search size={16} aria-hidden />
         </Link>
 
+        {/* PC: 既存会員向けの会員ページ入口 */}
+        <a
+          href={MEMBER_PAGE_URL}
+          className="hidden shrink-0 items-center gap-1.5 rounded-md border border-stone-300 px-3.5 py-2.5 text-xs font-black text-stone-700 transition-colors hover:border-primary hover:text-primary lg:order-4 lg:flex"
+        >
+          <UserRound size={14} aria-hidden />
+          会員ページ
+        </a>
+
         <Link
           href="/join"
-          className="flex shrink-0 items-center gap-1.5 rounded-md bg-line px-3.5 py-2.5 text-white transition-colors hover:bg-line-dark active:bg-line-dark lg:order-4"
+          className="flex shrink-0 items-center gap-1.5 rounded-md bg-line px-3.5 py-2.5 text-white transition-colors hover:bg-line-dark active:bg-line-dark lg:order-5"
         >
           <MessageCircle size={15} aria-hidden />
           <span className="text-xs font-black">LINE会員登録</span>
