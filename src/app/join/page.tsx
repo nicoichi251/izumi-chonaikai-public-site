@@ -10,7 +10,7 @@ import {
 import { Breadcrumb } from "@/components/layout/Breadcrumb";
 import { PageShell } from "@/components/layout/PageShell";
 import { mockHanData } from "@/lib/mockData";
-import { MEMBER_PAGE_URL } from "@/lib/site";
+import { LINE_ADD_FRIEND_URL, MEMBER_PAGE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "LINEで登録する",
@@ -53,6 +53,16 @@ export default function JoinPage() {
       <p className="text-xs text-stone-500 leading-relaxed">
         所要時間は約 30 秒。班ごとに友だち追加用の QR コードをご用意しています。
       </p>
+
+      <a
+        href={LINE_ADD_FRIEND_URL}
+        className="block rounded-md bg-line py-4 text-center text-base font-black text-white transition-colors hover:bg-line-dark"
+      >
+        LINEで友だち追加して登録する
+        <span className="mt-1 block text-xs font-bold text-white/85">
+          ボタンを押すとLINEが開きます ・ 約30秒で完了
+        </span>
+      </a>
 
       <p className="rounded-md border border-stone-200 bg-white px-4 py-3 text-xs font-bold text-stone-600">
         すでに登録済みの方は{" "}

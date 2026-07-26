@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Check, MessageCircle } from "lucide-react";
-import { MEMBER_PAGE_URL } from "@/lib/site";
+import { LINE_ADD_FRIEND_URL, MEMBER_PAGE_URL } from "@/lib/site";
 
 const BENEFITS = [
   "回覧板がスマホに届き、ワンタップで「確認」",
@@ -35,13 +35,18 @@ export function LineJoinCard() {
             </li>
           ))}
         </ul>
-        <Link
-          href="/join"
+        <a
+          href={LINE_ADD_FRIEND_URL}
           className="flex w-full items-center justify-center gap-2 rounded-md bg-line py-3 text-sm font-black text-white transition-colors hover:bg-line-dark active:bg-line-dark"
         >
           <MessageCircle size={16} aria-hidden />
           友だち追加して登録する
-        </Link>
+        </a>
+        <p className="text-center text-[11px] text-stone-500">
+          <Link href="/join" className="underline underline-offset-2 hover:text-primary">
+            登録手順をくわしく見る
+          </Link>
+        </p>
         <p className="text-center text-xs text-stone-500">
           <Link href="/preview" className="underline underline-offset-2 hover:text-primary">
             登録すると見られる画面を先にのぞく
