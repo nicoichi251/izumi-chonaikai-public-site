@@ -15,6 +15,7 @@ import {
   dbGetEvents,
   dbGetNews,
   dbGetNewsById,
+  dbGetUpcomingEvents,
   dbSearchArticles,
 } from "./articles-db";
 
@@ -115,4 +116,21 @@ export async function searchArticles(query: string): Promise<ArticleSearchResult
     news: mockWpNews.filter((n) => hit(n.title.rendered, n.content.rendered)),
     events: mockWpEvents.filter((e) => hit(e.title.rendered, e.content.rendered)),
   };
+}
+
+/** 日本時間の今日(YYYY-MM-DD) */
+const todayJst = (): string => new Date(Date.now() + 9 * 3600_000).toISOString().slice(0, 10);
+
+/**
+ * これからの行事（開催日順）。D1優先、無い環境はモックをフィルタ。
+ */
+export async function getUpcomingEvents(limit = 5): Promise<WpEvent[]> {
+  const today = todayJst();
+  const fromDb = await dbGetUpcomingEvents(today, limit);
+  if (fromDb && fromDb.length > 0) return fromDb;
+
+  return mockWpEvents
+    .filter((e) => (e.acf?.event_date ?? "") >= today)
+    .sort((a, b) => (a.acf?.event_date ?? "").localeCompare(b.acf?.event_date ?? ""))
+    .slice(0, limit);
 }

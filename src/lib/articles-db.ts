@@ -238,3 +238,18 @@ export async function dbGetArchives(): Promise<ArchiveEntry[]> {
     .all<ArchiveEntry>();
   return results;
 }
+
+/** 今後の行事（開催日が today 以降、昇順） */
+export async function dbGetUpcomingEvents(today: string, limit: number): Promise<WpEvent[] | null> {
+  const db = await getDb();
+  if (!db) return null;
+  const { results } = await db
+    .prepare(
+      `select id, title, body, event_date, location, registration_enabled, show_form, visibility, book_url, album_id, created_at, updated_at
+       from events where ${PUBLIC_NEWS_WHERE} and event_date >= ?1
+       order by event_date asc limit ?2`,
+    )
+    .bind(today, limit)
+    .all<EventRow>();
+  return results.map(eventRowToWp);
+}

@@ -6,10 +6,11 @@ import { HeroSection } from "@/components/home/HeroSection";
 import { DisasterAlert, type DisasterFeedItem } from "@/components/home/DisasterAlert";
 import { DigitalFeatures } from "@/components/home/DigitalFeatures";
 import { LatestNews } from "@/components/home/LatestNews";
+import { UpcomingEvents } from "@/components/home/UpcomingEvents";
 import { LineJoinCard } from "@/components/home/LineJoinCard";
 import { PreviewCTA } from "@/components/home/PreviewCTA";
 import { QuickNav } from "@/components/home/QuickNav";
-import { getNews } from "@/lib/wp-api";
+import { getNews, getUpcomingEvents } from "@/lib/wp-api";
 import type { WpNews } from "@/types/wordpress";
 
 // D1の最新コンテンツを常に反映するため動的レンダリング（旧ISR 60sの置き換え）
@@ -47,8 +48,9 @@ async function getDisasterFeed(): Promise<DisasterFeedItem[]> {
 }
 
 export default async function HomePage() {
-  const [newsRaw, disasterItems] = await Promise.all([
+  const [newsRaw, upcomingEvents, disasterItems] = await Promise.all([
     getNews({ perPage: HOME_NEWS_LIMIT }),
+    getUpcomingEvents(4),
     getDisasterFeed(),
   ]);
   const news = sortByPinAndDate(newsRaw).slice(0, HOME_NEWS_LIMIT);
@@ -63,6 +65,7 @@ export default async function HomePage() {
             <div className="space-y-6">
               <HeroSection />
               <LatestNews news={news} />
+              <UpcomingEvents events={upcomingEvents} />
               <div className="lg:hidden">
                 <LineJoinCard />
               </div>
