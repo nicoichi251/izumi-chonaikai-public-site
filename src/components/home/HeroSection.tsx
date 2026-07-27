@@ -12,7 +12,7 @@ export function HeroSection() {
     <section className="relative h-[320px] overflow-hidden rounded-xl border border-stone-200 lg:h-[440px]">
       <Image
         src="/images/hero.jpg"
-        alt="水と緑に囲まれた札幌市西区発寒の街並み"
+        alt="発寒泉公園に立つ泉町会ののぼりと、緑に包まれた遊歩道"
         fill
         priority
         sizes="(max-width: 1024px) 100vw, 960px"
