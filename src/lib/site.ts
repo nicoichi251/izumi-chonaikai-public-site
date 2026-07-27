@@ -8,4 +8,4 @@ export const LINE_ADD_FRIEND_URL = "https://lin.ee/zoFCyNY";
 
 /** 製品ブランド（白ラベル）: このインスタンスの愛称と提供元 */
 export const TOWN_NAME = "IZUMI TOWN";
-export const POWERED_BY_URL = "https://nicoichi.co.jp";
+export const POWERED_BY_URL = "https://sunnyside-group.com/";

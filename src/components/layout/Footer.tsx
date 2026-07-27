@@ -102,7 +102,7 @@ export function Footer() {
               rel="noopener noreferrer"
               className="font-normal text-stone-400 hover:text-primary"
             >
-              powered by NICOICHI
+              powered by SUNNY SIDE
             </a>
           </p>
         </div>
