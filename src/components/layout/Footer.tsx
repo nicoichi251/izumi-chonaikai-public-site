@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { MessageCircle } from "lucide-react";
-import { MEMBER_PAGE_URL } from "@/lib/site";
+import { MEMBER_PAGE_URL, POWERED_BY_URL, TOWN_NAME } from "@/lib/site";
 
 const SITE_LINKS = [
   { href: "/news", label: "お知らせ" },
@@ -94,7 +94,17 @@ export function Footer() {
               </Link>
             ))}
           </div>
-          <p className="font-bold">© {year} 発寒泉町内会</p>
+          <p className="font-bold">
+            © {year} 発寒泉町内会 ・ {TOWN_NAME}{" "}
+            <a
+              href={POWERED_BY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="font-normal text-stone-400 hover:text-primary"
+            >
+              powered by NICOICHI
+            </a>
+          </p>
         </div>
       </div>
     </footer>

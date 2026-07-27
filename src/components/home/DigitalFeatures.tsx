@@ -52,7 +52,8 @@ export function DigitalFeatures() {
         ))}
       </div>
       <p className="text-sm text-stone-600">
-        しくみに興味のある町内会・自治会の方は{" "}
+        このしくみは「<strong>NICO TOWN</strong>」として他の町内会・自治会にも導入いただけます。
+        ご興味のある方は{" "}
         <Link href="/contact" className="font-bold text-primary underline underline-offset-2">
           お問い合わせ
         </Link>{" "}
