@@ -11,7 +11,7 @@ export function HeroSection() {
   return (
     <section className="relative h-[320px] overflow-hidden rounded-xl border border-stone-200 lg:h-[440px]">
       <Image
-        src="/images/hero.jpg"
+        src="/images/hero-park.jpg"
         alt="発寒泉公園に立つ泉町会ののぼりと、緑に包まれた遊歩道"
         fill
         priority
